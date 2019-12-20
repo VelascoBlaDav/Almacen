@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Albaran {
     //Prueba 20_12_20
+    //Prueba 20_12_20
     private Cliente comprador;
     private Date fAlbaran;
     private static int nAlbaran;
