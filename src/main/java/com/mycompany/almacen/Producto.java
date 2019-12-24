@@ -13,6 +13,10 @@ public class Producto {
     private Date fCaducidad;
     public Almacen almacen;//elegir el almacen al que va cada producto
     private estadoProducto estadoProducto;
+    
+    public Producto(){
+        
+    }
 
     public String getReferencia() {
         return referencia;
@@ -70,4 +74,22 @@ public class Producto {
     public Almacen getAlmacen(Almacen almacen){
         return almacen;
     }
+
+    public float getDescAplic() {
+        return descAplic;
+    }
+
+    public void setDescAplic(float descAplic) {
+        this.descAplic = descAplic;
+    }
+
+    public estadoProducto getEstadoProducto() {
+        //Declarar una dependencia hacia el cliente
+        return estadoProducto;
+    }
+
+    public void setEstadoProducto(estadoProducto estadoProducto) {
+        this.estadoProducto = estadoProducto;
+    }
+    
 }

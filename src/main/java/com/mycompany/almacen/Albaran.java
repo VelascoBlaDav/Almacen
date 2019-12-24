@@ -9,6 +9,8 @@ public class Albaran {
     private static int nAlbaran;
     private Unidad[] listaProductos;
     private int total;// ToDo: Calcular en funcion de Unidades
+    
+    java.util.Date fecha = new Date(); //instancio un objeto Date para obtener la fecha actual
 
     public Cliente getComprador() {
         return comprador;
@@ -18,8 +20,8 @@ public class Albaran {
         this.comprador = comprador;
     }
 
-    //Hacer funcion para que de la fecha en la que se realiza el albaran
     public Date getfAlbaran() {
+        fAlbaran = fecha; //copio la fecha actual en fAlbaran
         return fAlbaran;
     }
 
@@ -50,6 +52,4 @@ public class Albaran {
     public void setTotal(int total) {
         this.total = total;
     }
-    
-    
 }
