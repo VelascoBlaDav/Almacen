@@ -54,10 +54,12 @@ public class Producto {
         return pVenta;
     }
 
-    public void setpVenta(float pVenta) {
-        this.pVenta = (float) (pCompra + 0.5*pCompra); //sera el 50% de pCompra
+    public void setpVenta() {   
+        this.pVenta = (float) (pCompra + 0.5*pCompra); //Por defecto, sera el 50% de pCompra
     }
-
+    public void setpVenta(float pVenta) {
+        this.pVenta = pVenta;
+    }
     public Date getfCaducidad() {
         return fCaducidad;
     }
@@ -92,4 +94,6 @@ public class Producto {
         this.estadoProducto = estadoProducto;
     }
     
+    //Agregar productos a un almacen concreto
+    //Mover producto de un almacen a otro
 }

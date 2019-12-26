@@ -73,5 +73,7 @@ public class Principal {
         - Obtener un listado detallado de facturas de un cliente 
         - Cuanto Stock tenemos de un producto concreto.
         */
+        
+        // Funcion venta de producto, recibe una unidad, resta stock y llama a funcion generar albaran.
     }
 }

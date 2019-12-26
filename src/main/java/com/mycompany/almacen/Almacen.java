@@ -7,6 +7,7 @@ import static com.mycompany.almacen.tipoAlmacen.c;
 
 
 public class Almacen {
+    //Codigo almacen parametro estatico
     private String codAlmacen;
     private tipoAlmacen zona;
     private Unidad[] stock;
@@ -125,4 +126,7 @@ public class Almacen {
         // cont ++
     }*/    
     
+    
+    //Conteo productos libre, vendido, reservado.
+    //Productos libres caducados.
 }
