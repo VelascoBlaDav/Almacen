@@ -21,6 +21,12 @@ public class Principal {
         String codAlmacen;//elegir el almacen al que va cada producto
         int año, mes, dia, var, unidades, i, salir = 0, n = 100;
         estadoProducto estadoProducto;
+        //Creamos los tres almacenes de la empresa,1 de cada tipo.
+        Almacen[] almacenes = null;
+        almacenes[0] = new Almacen("Seco",tipoAlmacen.a);
+        almacenes[1] = new Almacen("Humedo",tipoAlmacen.b);
+        almacenes[2] = new Almacen("Congelado",tipoAlmacen.c);
+        
         
         Producto p[] = new Producto[n];
         Scanner sc = new Scanner (System.in);
