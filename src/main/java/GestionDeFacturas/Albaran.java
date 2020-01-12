@@ -2,21 +2,42 @@
 package GestionDeFacturas;
 
 import GestionDeProductos.Unidad;
-import GestionDeClientes.Cliente;
 import java.util.Date;
 
 public class Albaran {
-    private Cliente comprador;
+    private String comprador; //nombreCliente
     private Date fAlbaran;
-    private static int nAlbaran;
+    private static int numeroAlbaranes;
+    String refAlbaran;
     private Unidad[] listaProductos;
     private int total;// ToDo: Calcular en funcion de Unidades
 
-    public Cliente getComprador() {
+    public Albaran(String comprador, Date fAlbaran, Unidad[] listaProductos) {
+        numeroAlbaranes++;
+        this.comprador = comprador;
+        this.fAlbaran = fAlbaran;
+        this.refAlbaran = formatoNAlbaran(numeroAlbaranes);
+        this.listaProductos = listaProductos;
+        
+    }
+    
+    public static String formatoNAlbaran(int numeroReferencia){
+        String cadenaReferencia = null;
+        if(1<=numeroReferencia && numeroReferencia<=9){
+            cadenaReferencia="AB-00" + Integer.toString(numeroReferencia);
+        }else if(10<=numeroReferencia && numeroReferencia<=99){
+            cadenaReferencia="AB-0" + Integer.toString(numeroReferencia);
+        }else if(100<=numeroReferencia && numeroReferencia<=999){
+            cadenaReferencia="AB-" + Integer.toString(numeroReferencia);
+        }
+        return cadenaReferencia;
+    }    
+    
+    public String getComprador() {
         return comprador;
     }
 
-    public void setComprador(Cliente comprador) {
+    public void setComprador(String comprador) {
         this.comprador = comprador;
     }
 
@@ -30,14 +51,6 @@ public class Albaran {
     public void setfAlbaran() {
         this.fAlbaran=new Date(); //instancio un objeto Date para obtener la fecha actual
         
-    }
-
-    public static int getnAlbaran() {
-        return nAlbaran;
-    }
-
-    public static void setnAlbaran(int nAlbaran) {
-        Albaran.nAlbaran = nAlbaran;
     }
 
     public Unidad[] getListaProductos() {

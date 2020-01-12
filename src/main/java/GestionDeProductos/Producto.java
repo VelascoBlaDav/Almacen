@@ -1,6 +1,8 @@
 
 package GestionDeProductos;
 
+import GestionDeAlmacenes.Almacen;
+
 public class Producto {
     private static int NumProductos;
     private String referencia;
@@ -34,6 +36,7 @@ public class Producto {
         }
         return cadenaReferencia;
     }    
+
     public String getNombre() {
         return nombre;
     }
