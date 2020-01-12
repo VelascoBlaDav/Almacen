@@ -8,6 +8,8 @@ import GestionDeProductos.estadoProducto;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
+
 
 public class Principal {
     public static void main(String args[]){
@@ -17,113 +19,156 @@ public class Principal {
         float descAplic;
         Date fCaducidad;
         String codAlmacen;//elegir el almacen al que va cada producto
-        int año, mes, dia, var, unidades, i, n = 100;
+        int año, mes, dia, var, unidades, i, salir = 0, n = 100;
         estadoProducto estadoProducto;
         
         Producto p[] = new Producto[n];
         Scanner sc = new Scanner (System.in);
         
-        System.out.println("Bienvenido\n");
-        System.out.println("¿Que opcion desea realizar?\n\n");
-        System.out.println("1)Añadir un nuevo producto\n");
-        System.out.println("2)Cambiar de almacen a un producto\n");
-        System.out.println("3)Listar el numero de productos en un almacen\n");
-        System.out.println("4)Listar productos que van a caducar\n");
-        System.out.println("5)Listar el estado de los productos\n");
-        System.out.println("6)Listar el numero de productos libres caducados\n");
-        System.out.println("7)Eliminar productos caducados\n");
-        System.out.println("8)Vender producto\n");
-        System.out.println("9)Registrar un nuevo cliente\n");
-        
-        int opcion = sc.nextInt();
-        switch(opcion){
-            case 1:
-                System.out.println("Escribe los datos del producto:\n");
-             
-                System.out.println("Escribe el nombre del producto:\n");
-                nombreProducto = sc.nextLine();
-                System.out.println("Ancho del producto:\n");
-                ancho = sc.nextFloat();
-                System.out.println("Alto del producto:\n");
-                alto = sc.nextFloat();
-                System.out.println("Precio de compra:\n");
-                pCompra = sc.nextFloat();
-                System.out.println("El codigo de almacen:\n");
-                codAlmacen = sc.nextLine();
-                
-                
-                for(i=0;i<n;i++){
-                    if(p[i]==null){
-                        p[i] = new Producto(nombreProducto, ancho, alto, pCompra, codAlmacen); //Creo un producto en una posicion que no esta utilizada
-                        break; //una vez creo el producto salgo del bucle
+        do{
+            System.out.println("Bienvenido\n");
+            System.out.println("¿Que opcion desea realizar?\n\n");
+            System.out.println("0)Salir\n");
+            System.out.println("1)Añadir un nuevo producto\n");
+            System.out.println("2)Cambiar de almacen a un producto\n");
+            System.out.println("3)Listar el numero de productos en un almacen\n");
+            System.out.println("4)Listar productos que van a caducar\n");
+            System.out.println("5)Listar el estado de los productos\n");
+            System.out.println("6)Listar el numero de productos libres caducados\n");
+            System.out.println("7)Eliminar productos caducados\n");
+            System.out.println("8)Vender producto\n");
+            System.out.println("9)Registrar un nuevo cliente\n");
+            System.out.println("10)Añadir un nuevo almacen\n");
+
+            int opcion = sc.nextInt();
+            switch(opcion){
+                case 1:
+                    System.out.println("Escribe los datos del producto:\n");
+
+                    System.out.println("Escribe el nombre del producto:\n");
+                    sc.nextLine();
+                    nombreProducto = sc.nextLine();
+                    System.out.println("Ancho del producto:\n");
+                    sc.nextFloat();
+                    ancho = sc.nextFloat();
+                    System.out.println("Alto del producto:\n");
+                    sc.nextFloat();
+                    alto = sc.nextFloat();
+                    System.out.println("Precio de compra:\n");
+                    sc.nextFloat();
+                    pCompra = sc.nextFloat();
+                    System.out.println("El codigo de almacen:\n");
+                    sc.nextLine();
+                    codAlmacen = sc.nextLine();
+
+                    for(i=0;i<n;i++){
+                        if(p[i]==null){
+                            p[i] = new Producto(nombreProducto, ancho, alto, pCompra, codAlmacen); //Creo un producto en una posicion que no esta utilizada
+                            break; //una vez creo el producto salgo del bucle
+                        }
                     }
-                }
-                System.out.println("¿Cuantas unidades quieres añadir al producto?\n");
-                unidades = sc.nextInt();
-                
-                System.out.println("Datos de la fecha de caducidad:\n");
-                System.out.println("Introduce el año de caducidad:\n");
-                año = sc.nextInt();
-                System.out.println("Introduce el mes de caducidad:\n");
-                mes = sc.nextInt();
-                System.out.println("Introduce el dia de caducidad:\n");
-                dia = sc.nextInt();
-                fCaducidad= new Date(año, mes, dia);
-                System.out.println("El estado del producto:\n");
-                System.out.println("1: Libre\n2:Vendido\n3:Reservado");
-                var = sc.nextInt();
-                switch (var){
-                    case 1:
-                        //Libre
-                        break;
-                    case 2:
-                        //Vendido
-                        break;
-                    case 3:
-                        //Reservado
-                        break;
-                    default:
-                        //Libre
-                        break;
-                }
-                //Crear unidades de producto
-                Unidad u[] = new Unidad[unidades];
-                for(i=0;i<unidades;i++){
-                    u[i] = new Unidad();
-                }
-                break;
-            case 2:
-                
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                /*
-                Despues de una venta hay que hacer todas estas operaciones
-                - Obtener un listado de los productos.
-                - Obtener un listado de Albaranes. 
-                - Obtener un listado de productos buscados a partir de un precio de venta mayor a una cantidad
-                - Obtener un listado de albaranes generados en una fecha concreta.
-                - Obtener la suma total económica de productos vendidos. 
-                - Obtener un listado de las facturas pendientes de cobro. 
-                - Obtener un listado detallado de facturas de un cliente 
-                - Cuanto Stock tenemos de un producto concreto.
-                */
-                
-                // Funcion venta de producto, recibe una unidad, resta stock y llama a funcion generar albaran.
-                break;
-            case 9:
-                break;
-        }
+                    System.out.println("¿Cuantas unidades quieres añadir al producto?\n");
+                    sc.nextInt();
+                    unidades = sc.nextInt();
+
+                    System.out.println("Datos de la fecha de caducidad:\n");
+                    System.out.println("Introduce el año de caducidad:\n");
+                    sc.nextInt();
+                    año = sc.nextInt();
+                    System.out.println("Introduce el mes de caducidad:\n");
+                    sc.nextInt();
+                    mes = sc.nextInt();
+                    System.out.println("Introduce el dia de caducidad:\n");
+                    sc.nextInt();
+                    dia = sc.nextInt();
+                    fCaducidad= new Date(año, mes, dia);
+                    System.out.println("El estado del producto:\n");
+                    System.out.println("1: Libre\n2:Vendido\n3:Reservado");
+                    var = sc.nextInt();
+                    switch (var){
+                        case 1:
+                            //Libre
+                            break;
+                        case 2:
+                            //Vendido
+                            break;
+                        case 3:
+                            //Reservado
+                            break;
+                        default:
+                            //Libre
+                            break;
+                    }
+                    //Crear unidades de producto
+                    Unidad u[] = new Unidad[unidades];
+                    for(i=0;i<unidades;i++){
+                        u[i] = new Unidad();
+                    }
+                    break;
+                case 2:
+                    //Buscar el producto
+                    //Seleccionar el nuevo tipo de almacen segun su codigo
+                    //Cambiar el tipo de almacen
+                    break;
+                case 3:
+                    //
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    //Eliminar productos caducados
+                    //Comprobar la fecha actual y la fecha de la unidad del producto
+                    //Los productos cuya fecha sea menor a la fecha actual ponerlos a null
+                    break;
+                case 8:
+                    /*
+                    Despues de una venta hay que hacer todas estas operaciones
+                    - Obtener un listado de los productos.
+                    - Obtener un listado de Albaranes. 
+                    - Obtener un listado de productos buscados a partir de un precio de venta mayor a una cantidad
+                    - Obtener un listado de albaranes generados en una fecha concreta.
+                    - Obtener la suma total económica de productos vendidos. 
+                    - Obtener un listado de las facturas pendientes de cobro. 
+                    - Obtener un listado detallado de facturas de un cliente 
+                    - Cuanto Stock tenemos de un producto concreto.
+                    */
+
+                    // Funcion venta de producto, recibe una unidad, resta stock y llama a funcion generar albaran.
+                    break;
+                case 9:
+                    //Constructor de almacen
+                    break;
+                    
+                case 0:
+                    salir = 1;
+                    break;
+
+
+
+            }
+        }while(salir==0);
         
         
     }
 }
+/*
+recorrer(){
+    for (int i=0;i<a.length;i++){
+                //Mostramos la direccion del objeto
+                System.out.println(a[i]);
+            }
+}
+bucar(codAlmacen){
+    var=recorrer();
+    if(var==codAlmacen)
+        return a;
+}
+eliminar(codAlmacen){
+    buscar(codAlmacen);
+    a=null;
+}
+*/
