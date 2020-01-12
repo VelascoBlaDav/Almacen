@@ -2,16 +2,15 @@
 package GestionDeProductos;
 
 import GestionDeAlmacenes.Almacen;
-import java.util.Date;
 
 public class Producto {
     private String referencia;
     private float ancho;
     private float alto;
-    private float pCompra;
+    private float pCompra; //Suponemos que un producto se compra siempre al mismo precio
     private float pVenta; //50% mas que el precio de compra
     private float descAplic;
-    private Date fCaducidad;
+    // Eliminar: private Date fCaducidad; Cambiado a unidad.
     public Almacen almacen;//elegir el almacen al que va cada producto
     
     public Producto(){
@@ -59,13 +58,6 @@ public class Producto {
     }
     public void setpVenta(float pVenta) {
         this.pVenta = pVenta;
-    }
-    public Date getfCaducidad() {
-        return fCaducidad;
-    }
-
-    public void setfCaducidad(Date fCaducidad) {
-        this.fCaducidad = fCaducidad;
     }
     
     public void setAlmacen(Almacen almacen){

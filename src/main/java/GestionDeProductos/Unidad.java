@@ -1,7 +1,6 @@
 
 package GestionDeProductos;
 
-import GestionDeProductos.Producto;
 import GestionDeAlmacenes.Almacen;
 import java.util.Date;
 
@@ -13,7 +12,6 @@ public class Unidad {
     private Producto tipoProducto;
     private int descuento;
     private Date fCaducidad;
-    private Almacen localizacion;
     private estadoProducto estadoProducto;
 
     public Producto getTipoProducto() {
@@ -40,9 +38,6 @@ public class Unidad {
         this.fCaducidad = fCaducidad;
     }
 
-    public Almacen getLocalizacion() {
-        return localizacion;
-    }
 
     public void setLocalizacion(Almacen localizacion) {
         //ToDo localizacion del producto == localizacion de la unidad
