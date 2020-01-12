@@ -1,22 +1,45 @@
 
 package GestionDeProductos;
 
-import GestionDeAlmacenes.Almacen;
-
 public class Producto {
+    private static int NumProductos;
     private String referencia;
+    private String nombre;
     private float ancho;
     private float alto;
     private float pCompra; //Suponemos que un producto se compra siempre al mismo precio
     private float pVenta; //50% mas que el precio de compra
     private float descAplic;
-    // Eliminar: private Date fCaducidad; Cambiado a unidad.
-    public Almacen almacen;//elegir el almacen al que va cada producto
+    private String codAlmacen;//elegir el almacen al que va cada producto
     
-    public Producto(){
-        
+    public Producto(String nombre, float ancho, float alto, float pCompra, String codAlmacen){
+        NumProductos++;
+        this.referencia= formatoRefProducto(NumProductos);
+        this.nombre=nombre;
+        this.ancho=ancho;
+        this.alto=alto;
+        this.pCompra=pCompra;
+        this.pVenta=(float) (pCompra*1.5);
+        this.descAplic=0;   //Por defecto no hay descuento aplicado al producto.
+        this.codAlmacen=codAlmacen;
     }
-
+    public static String formatoRefProducto(int numeroReferencia){
+        String cadenaReferencia = null;
+        if(1<=numeroReferencia && numeroReferencia<=9){
+            cadenaReferencia="PR-00" + Integer.toString(numeroReferencia);
+        }else if(10<=numeroReferencia && numeroReferencia<=99){
+            cadenaReferencia="PR-0" + Integer.toString(numeroReferencia);
+        }else if(100<=numeroReferencia && numeroReferencia<=999){
+            cadenaReferencia="PR-" + Integer.toString(numeroReferencia);
+        }
+        return cadenaReferencia;
+    }    
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
     public String getReferencia() {
         return referencia;
     }
@@ -52,21 +75,17 @@ public class Producto {
     public float getpVenta() {
         return pVenta;
     }
-
-    public void setpVenta() {   
-        this.pVenta = (float) (pCompra + 0.5*pCompra); //Por defecto, sera el 50% de pCompra
-    }
     public void setpVenta(float pVenta) {
         this.pVenta = pVenta;
     }
     
-    public void setAlmacen(Almacen almacen){
+    public void setAlmacen(String codAlmacen){
         //ToDo comprobar si el tipo de almacen necesario existe y si no crearlo
-        this.almacen = almacen;
+        this.codAlmacen = codAlmacen;
     }
     
-    public Almacen getAlmacen(Almacen almacen){
-        return almacen;
+    public String getAlmacen(){
+        return codAlmacen;
     }
 
     public float getDescAplic() {
