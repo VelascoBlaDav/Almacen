@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 
 public class Principal {
     private static Almacen[] almacenes = null;
+    private static int n = 100;
     public static void main(String args[]){
         
         String nombreProducto;
@@ -21,7 +22,7 @@ public class Principal {
         float descAplic;
         Date fCaducidad;
         String codAlmacen;//elegir el almacen al que va cada producto
-        int año, mes, dia, var, unidades, i, salir = 0, n = 100;
+        int año, mes, dia, var, uni, i, salir = 0;
         estadoProducto estadoProducto;
         //Creamos los tres almacenes de la empresa,1 de cada tipo.
         almacenes[0] = new Almacen("Seco",tipoAlmacen.a);
@@ -29,7 +30,7 @@ public class Principal {
         almacenes[2] = new Almacen("Congelado",tipoAlmacen.c);
         
         
-        Producto p[] = new Producto[n];
+        Producto productos[] = new Producto[n];
         Scanner sc = new Scanner (System.in);
         
         do{
@@ -69,14 +70,14 @@ public class Principal {
                     codAlmacen = sc.nextLine();
 
                     for(i=0;i<n;i++){
-                        if(p[i]==null){
-                            p[i] = new Producto(nombreProducto, ancho, alto, pCompra, codAlmacen); //Creo un producto en una posicion que no esta utilizada
+                        if(productos[i]==null){
+                            productos[i] = new Producto(nombreProducto, ancho, alto, pCompra, codAlmacen); //Creo un producto en una posicion que no esta utilizada
                             break; //una vez creo el producto salgo del bucle
                         }
                     }
                     System.out.println("¿Cuantas unidades quieres añadir al producto?\n");
                     sc.nextInt();
-                    unidades = sc.nextInt();
+                    uni = sc.nextInt();
 
                     System.out.println("Datos de la fecha de caducidad:\n");
                     System.out.println("Introduce el año de caducidad:\n");
@@ -107,9 +108,9 @@ public class Principal {
                             break;
                     }
                     //Crear unidades de producto
-                    Unidad u[] = new Unidad[unidades];
-                    for(i=0;i<unidades;i++){
-                        u[i] = new Unidad();
+                    Unidad unidades[] = new Unidad[uni];
+                    for(i=0;i<uni;i++){
+                        unidades[i] = new Unidad();
                     }
                     break;
                 case 2:
@@ -167,6 +168,19 @@ public class Principal {
             }
         }
         return null;
+    }
+
+    public Producto bucarProducto(String referencia){
+        for (int i=0;i<n;i++){
+            if(productos[i].referencia == referencia){
+                return productos[i];
+            }
+        }
+        return null;
+    }
+    public void eliminarProducto(String referencia){
+        Producto P = bucarProducto(referencia);
+        P = null;
     }
 }
 /*
