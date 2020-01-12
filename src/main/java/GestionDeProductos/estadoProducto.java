@@ -1,5 +1,5 @@
 
-package com.mycompany.almacen;
+package GestionDeProductos;
 
 public enum estadoProducto {
     a, //Libre

@@ -1,6 +1,7 @@
 
-package com.mycompany.almacen;
+package GestionDeProductos;
 
+import GestionDeAlmacenes.Almacen;
 import java.util.Date;
 
 public class Producto {
@@ -12,7 +13,6 @@ public class Producto {
     private float descAplic;
     private Date fCaducidad;
     public Almacen almacen;//elegir el almacen al que va cada producto
-    private estadoProducto estadoProducto;
     
     public Producto(){
         
@@ -83,15 +83,6 @@ public class Producto {
 
     public void setDescAplic(float descAplic) {
         this.descAplic = descAplic;
-    }
-
-    public estadoProducto getEstadoProducto() {
-        //Declarar una dependencia hacia el cliente
-        return estadoProducto;
-    }
-
-    public void setEstadoProducto(estadoProducto estadoProducto) {
-        this.estadoProducto = estadoProducto;
     }
     
     //Agregar productos a un almacen concreto

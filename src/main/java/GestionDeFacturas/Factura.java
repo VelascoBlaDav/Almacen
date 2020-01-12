@@ -1,6 +1,10 @@
 
-package com.mycompany.almacen;
+package GestionDeFacturas;
 
+import GestionDeFacturas.formaPago;
+import GestionDeFacturas.estadoFactura;
+import GestionDeClientes.Cliente;
+import GestionDeProductos.Unidad;
 import java.util.Date;
 
 public class Factura {

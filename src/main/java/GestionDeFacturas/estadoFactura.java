@@ -1,5 +1,5 @@
 
-package com.mycompany.almacen;
+package GestionDeFacturas;
 
 public enum estadoFactura {
     a, //No cobrado (por defecto es la que debe estar)

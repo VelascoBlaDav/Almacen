@@ -1,5 +1,5 @@
 
-package com.mycompany.almacen;
+package GestionDeClientes;
 
 public class Cliente {
     private String nombre;

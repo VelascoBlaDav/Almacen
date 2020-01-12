@@ -1,5 +1,7 @@
 package com.mycompany.almacen;
 
+import GestionDeAlmacenes.Almacen;
+import GestionDeProductos.estadoProducto;
 import java.util.Date;
 import java.util.Scanner;
 

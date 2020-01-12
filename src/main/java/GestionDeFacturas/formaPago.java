@@ -1,5 +1,5 @@
 
-package com.mycompany.almacen;
+package GestionDeFacturas;
 
 public enum formaPago {
     a,  //Contado

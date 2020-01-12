@@ -1,5 +1,5 @@
 
-package com.mycompany.almacen;
+package GestionDeAlmacenes;
 
 public enum tipoAlmacen {
     a,  //Seco

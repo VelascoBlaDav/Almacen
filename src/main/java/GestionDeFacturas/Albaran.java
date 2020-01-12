@@ -1,6 +1,8 @@
 
-package com.mycompany.almacen;
+package GestionDeFacturas;
 
+import GestionDeProductos.Unidad;
+import GestionDeClientes.Cliente;
 import java.util.Date;
 
 public class Albaran {

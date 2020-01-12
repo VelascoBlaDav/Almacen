@@ -1,18 +1,49 @@
 
-package com.mycompany.almacen;
+package GestionDeAlmacenes;
 
-import static com.mycompany.almacen.tipoAlmacen.a;
-import static com.mycompany.almacen.tipoAlmacen.b;
-import static com.mycompany.almacen.tipoAlmacen.c;
-
+import GestionDeProductos.Unidad;
+import GestionDeProductos.Producto;
+import static GestionDeAlmacenes.tipoAlmacen.a;
+import static GestionDeAlmacenes.tipoAlmacen.b;
+import static GestionDeAlmacenes.tipoAlmacen.c;
 
 public class Almacen {
     //Codigo almacen parametro estatico
     private String codAlmacen;
     private tipoAlmacen zona;
-    private Unidad[] stock;
-    private Unidad[] vendidos;
-    private Unidad[] reservado;
+    public Unidad[] stock;
+    public Unidad[] vendidos;
+    public Unidad[] reservado;
+    public Unidad[] libres;
+    
+    private static int numProdA = 0;
+    private static int numProdB = 0;
+    private static int numProdC = 0;
+
+    public Almacen(String codAlmacen, tipoAlmacen zona, Unidad[] stock, Unidad[] vendidos, Unidad[] reservado, Unidad[] libres) {
+        this.codAlmacen = codAlmacen;
+        this.zona = zona;
+        this.stock = stock;
+        this.vendidos = vendidos;
+        this.reservado = reservado;
+        this.libres = libres;
+        switch (zona) {
+            case a:
+                numProdA++;
+                break;
+            case b:
+                numProdB++;
+                break;
+            case c:
+                numProdC++;
+                break;
+            default:
+                System.out.println("Error, no existe ese almacen\n");
+                //ToDo crear nuevo almacen
+                break;
+        }
+         
+    }
     
     int i;
     public String getCodAlmacen() {
@@ -56,26 +87,22 @@ public class Almacen {
     }
     
     private static void countProd(tipoAlmacen zona){
-        int numProduct = 0;
         if(null != zona)
         switch (zona) {
             case a:
-                //Calcular nuemero de productos en cada almacen
-                System.out.println("El numero de productos en el almacen "+zona+"es "+numProduct);
+                System.out.println("El numero de productos en el almacen "+zona+"es "+numProdA);
                 break;
             case b:
-                //Calcular nuemero de productos en cada almacen
-                System.out.println("El numero de productos en el almacen "+zona+"es "+numProduct);
+                System.out.println("El numero de productos en el almacen "+zona+"es "+numProdB);
                 break;
             case c:
-                //Calcular nuemero de productos en cada almacen
-                System.out.println("El numero de productos en el almacen "+zona+"es "+numProduct);
+                System.out.println("El numero de productos en el almacen "+zona+"es "+numProdC);
                 break;
             default:
                 System.out.println("Error, no existe ese almacen\n");
                 break;
         }
-    }
+    }    
     private static void countProdCercaDeCaducar(tipoAlmacen zona){
         //ToDo Calcular el numero de productos que estan cerca de calcular
         int numProductCad = 0;
@@ -102,18 +129,18 @@ public class Almacen {
     private static void eliminarProdCaducados(Producto pCaducado){
         //ToDo Eliminar producto caducado del almacen
         
-            
     }
     
-    //private static void cambiarAlmacen(String referenciaProducto, Almacen almacen){
+    private static void cambiarAlmacen(String referenciaProducto, Almacen almacen){
         //ToDo cambiar el tipo de almacen de un producto
-        //Producto.setAlmacen(almacen);
-    //}
+        
+    }
 
-    /*private static void countProdA(){
+    private static void countProdA(){
         //ToDo Clcular el numero de productos que estan en estado libre
         //if (producto esta en un almacen && producto.estado=A)
         // cont ++
+        
     }
     private static void countProdB(){
         //ToDo Clcular el numero de productos que estan en estado vendido
@@ -124,7 +151,7 @@ public class Almacen {
         //ToDo Clcular el numero de productos que estan en estado reservado
         //if (producto esta en un almacen && producto.estado= C)
         // cont ++
-    }*/    
+    }
     
     
     //Conteo productos libre, vendido, reservado.
