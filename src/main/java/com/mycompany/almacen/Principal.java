@@ -12,7 +12,9 @@ import javax.swing.JOptionPane;
 
 
 public class Principal {
+    private static Almacen[] almacenes = null;
     public static void main(String args[]){
+        
         String nombreProducto;
         float ancho, alto;
         float pCompra;
@@ -22,7 +24,6 @@ public class Principal {
         int año, mes, dia, var, unidades, i, salir = 0, n = 100;
         estadoProducto estadoProducto;
         //Creamos los tres almacenes de la empresa,1 de cada tipo.
-        Almacen[] almacenes = null;
         almacenes[0] = new Almacen("Seco",tipoAlmacen.a);
         almacenes[1] = new Almacen("Humedo",tipoAlmacen.b);
         almacenes[2] = new Almacen("Congelado",tipoAlmacen.c);
@@ -153,12 +154,19 @@ public class Principal {
                     salir = 1;
                     break;
 
-
-
             }
         }while(salir==0);
         
         
+    }
+    public static Almacen getAlmacen(String codAlmacen ){
+        for (int i=0;i<almacenes.length;i++){
+            //Recorremos todos los objetos
+            if(almacenes[i].getCodAlmacen()==codAlmacen){
+                return almacenes[i];
+            }
+        }
+        return null;
     }
 }
 /*
