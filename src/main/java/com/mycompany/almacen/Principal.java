@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 public class Principal {
     private static Almacen[] almacenes = null;
     private static int n = 100;
+    private static Producto[] productos = new Producto[n];
     public static void main(String args[]){
         
         String nombreProducto;
@@ -30,7 +31,7 @@ public class Principal {
         almacenes[2] = new Almacen("Congelado",tipoAlmacen.c);
         
         
-        Producto productos[] = new Producto[n];
+        
         Scanner sc = new Scanner (System.in);
         
         do{
@@ -172,7 +173,7 @@ public class Principal {
 
     public Producto bucarProducto(String referencia){
         for (int i=0;i<n;i++){
-            if(productos[i].referencia == referencia){
+            if(productos[i].getReferencia() == referencia){
                 return productos[i];
             }
         }
