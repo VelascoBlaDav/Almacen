@@ -47,7 +47,6 @@ public class Principal {
             System.out.println("7)Eliminar productos caducados\n");
             System.out.println("8)Vender producto\n");
             System.out.println("9)Registrar un nuevo cliente\n");
-            System.out.println("10)Añadir un nuevo almacen\n");
 
             int opcion = sc.nextInt();
             switch(opcion){
@@ -161,7 +160,7 @@ public class Principal {
         
         
     }
-    public static Almacen getAlmacen(String codAlmacen ){
+    public static Almacen buscarAlmacen(String codAlmacen ){
         for (int i=0;i<almacenes.length;i++){
             //Recorremos todos los objetos
             if(almacenes[i].getCodAlmacen()==codAlmacen){
@@ -171,7 +170,7 @@ public class Principal {
         return null;
     }
 
-    public Producto bucarProducto(String referencia){
+    public Producto buscarProducto(String referencia){
         for (int i=0;i<n;i++){
             if(productos[i].getReferencia() == referencia){
                 return productos[i];
@@ -180,7 +179,7 @@ public class Principal {
         return null;
     }
     public void eliminarProducto(String referencia){
-        Producto P = bucarProducto(referencia);
+        Producto P = buscarProducto(referencia);
         P = null;
     }
 }

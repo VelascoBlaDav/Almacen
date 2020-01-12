@@ -2,6 +2,7 @@
 package GestionDeProductos;
 
 import GestionDeAlmacenes.Almacen;
+import com.mycompany.almacen.Principal;
 
 public class Producto {
     private static int NumProductos;
@@ -12,7 +13,7 @@ public class Producto {
     private float pCompra; //Suponemos que un producto se compra siempre al mismo precio
     private float pVenta; //50% mas que el precio de compra
     private float descAplic;
-    private String codAlmacen;//elegir el almacen al que va cada producto
+    private Almacen almacen;//elegir el almacen al que va cada producto
     
     public Producto(String nombre, float ancho, float alto, float pCompra, String codAlmacen){
         NumProductos++;
@@ -23,7 +24,7 @@ public class Producto {
         this.pCompra=pCompra;
         this.pVenta=(float) (pCompra*1.5);
         this.descAplic=0;   //Por defecto no hay descuento aplicado al producto.
-        this.codAlmacen=codAlmacen;
+        this.almacen=Principal.buscarAlmacen(codAlmacen);
     }
     public static String formatoRefProducto(int numeroReferencia){
         String cadenaReferencia = null;
@@ -82,13 +83,13 @@ public class Producto {
         this.pVenta = pVenta;
     }
     
-    public void setAlmacen(String codAlmacen){
+    public void setAlmacen(Almacen almacen){
         //ToDo comprobar si el tipo de almacen necesario existe y si no crearlo
-        this.codAlmacen = codAlmacen;
+        this.almacen = almacen;
     }
     
-    public String getAlmacen(){
-        return codAlmacen;
+    public Almacen getAlmacen(){
+        return almacen;
     }
 
     public float getDescAplic() {
