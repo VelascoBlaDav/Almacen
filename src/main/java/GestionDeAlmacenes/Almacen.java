@@ -128,34 +128,4 @@ public class Almacen {
         }
         
     }
-    private static void eliminarProdCaducados(Producto pCaducado){
-        //ToDo Eliminar producto caducado del almacen
-        
-    }
-    
-    private static void cambiarAlmacen(String referenciaProducto, Almacen almacen){
-        //ToDo cambiar el tipo de almacen de un producto
-        
-    }
-
-    private static void countProdA(){
-        //ToDo Clcular el numero de productos que estan en estado libre
-        //if (producto esta en un almacen && producto.estado=A)
-        // cont ++
-        
-    }
-    private static void countProdB(){
-        //ToDo Clcular el numero de productos que estan en estado vendido
-        //if (producto esta en un almacen && producto.estado = B)
-        // cont ++
-    }
-    private static void countProdC(){
-        //ToDo Clcular el numero de productos que estan en estado reservado
-        //if (producto esta en un almacen && producto.estado= C)
-        // cont ++
-    }
-    
-    
-    //Conteo productos libre, vendido, reservado.
-    //Productos libres caducados.
 }

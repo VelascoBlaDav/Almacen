@@ -3,6 +3,7 @@ package com.mycompany.almacen;
 import GestionDeAlmacenes.Almacen;
 import GestionDeAlmacenes.tipoAlmacen;
 import GestionDeClientes.Cliente;
+import GestionDeFacturas.Albaran;
 import GestionDeProductos.Producto;
 import GestionDeProductos.Unidad;
 import GestionDeProductos.estadoProducto;
@@ -327,6 +328,10 @@ public class Principal {
     }
 //ALBARAN
     //BUSCAR ALBARAN
+
+    public static Albaran buscarAlbaran(String refAlbaran) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
 /*
 recorrer(){
