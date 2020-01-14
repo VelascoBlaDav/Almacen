@@ -94,27 +94,10 @@ public class Principal {
                     sc.nextInt();
                     dia = sc.nextInt();
                     fCaducidad= new Date(año, mes, dia);
-                    System.out.println("El estado del producto:\n");
-                    System.out.println("1: Libre\n2:Vendido\n3:Reservado");
-                    var = sc.nextInt();
-                    switch (var){
-                        case 1:
-                            //Libre
-                            break;
-                        case 2:
-                            //Vendido
-                            break;
-                        case 3:
-                            //Reservado
-                            break;
-                        default:
-                            //Libre
-                            break;
-                    }
                     //Crear unidades de producto
                     for(i=0;i<uni;i++){
                         if(unidades[i]==null){
-                            unidades[i] = new Unidad();
+                            unidades[i] = new Unidad(nombreProducto, fCaducidad);
                             break;
                         }
                     }
