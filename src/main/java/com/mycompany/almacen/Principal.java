@@ -110,6 +110,7 @@ public class Principal {
                     //Seleccionar el nuevo tipo de almacen segun su codigo
                     //Cambiar el tipo de almacen
                     p=buscarProducto(referencia);
+                    System.out.println("El almacen del producto es"+p.getAlmacen());
                     
                     break;
                 case 3:
