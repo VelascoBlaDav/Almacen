@@ -17,17 +17,19 @@ public class Principal {
     private static Producto[] productos = new Producto[n];
     private static Unidad unidades[] = new Unidad[uni];
     private static Cliente clientes[] = new Cliente[client];
+    
     public static void main(String args[]){
         
         String nombreProducto, nombre, nif, direccion, referencia = null;
         float ancho, alto;
         float pCompra,credito;
-        float descAplic;
         Date fCaducidad;
         String codAlmacen;//elegir el almacen al que va cada producto
-        int año, mes, dia, var, i, salir = 0;
-        estadoProducto estadoProducto;
+        int año, mes, dia, i, salir = 0, si, descuento;
         Producto p;
+        Almacen a;
+        Unidad u;
+        
         //Creamos los tres almacenes de la empresa,1 de cada tipo.
         almacenes[0] = new Almacen("Seco",tipoAlmacen.a);
         almacenes[1] = new Almacen("Humedo",tipoAlmacen.b);
@@ -40,20 +42,19 @@ public class Principal {
         do{
             System.out.println("Bienvenido\n");
             System.out.println("¿Que opcion desea realizar?\n\n");
-            System.out.println("0)Salir\n");
+            System.out.println("0)Salir\n"); //Completo
             System.out.println("1)Añadir un nuevo producto\n"); //Completo
-            System.out.println("2)Cambiar de almacen a un producto\n"); 
-            System.out.println("3)Listar el numero de unidades de productos en un almacen\n");
-            System.out.println("4)Listar unidades de productos que van a caducar\n");
-            System.out.println("5)Listar el estado de los productos\n");
-            System.out.println("6)Listar el numero de productos libres caducados\n");
-            System.out.println("7)Eliminar productos caducados\n");
+            System.out.println("2)Cambiar de almacen a un producto\n"); //Completo
+            System.out.println("3)Listar el numero de unidades de productos en un almacen\n"); //Completo
+            System.out.println("4)Listar unidades de productos que van a caducar\n"); //Completo
+            System.out.println("5)Listar el estado de los productos\n"); //Completo
+            System.out.println("6)Listar el numero de productos libres caducados\n"); //Completo
+            System.out.println("7)Eliminar productos caducados\n"); //Completo
             System.out.println("8)Vender producto\n");
             System.out.println("9)Registrar un nuevo cliente\n"); //Completo
             System.out.println("10)Listar productos\n");//Completo
             System.out.println("11)Añadir unidades de un producto existente\n");//Completo
-            System.out.println("12)Añadir descuento a un producto\n");
-            System.out.println("13)Añadir descuento a una unidad\n");
+            System.out.println("12)Añadir descuento a una unidad\n");
 
             int opcion = sc.nextInt();
             switch(opcion){
@@ -111,21 +112,43 @@ public class Principal {
                     //Cambiar el tipo de almacen
                     p=buscarProducto(referencia);
                     System.out.println("El almacen del producto es"+p.getAlmacen());
-                    
+                    System.out.println("¿Desea cambiarlo?(0-no,1-si)");
+                    sc.nextInt();
+                    si = sc.nextInt();
+                    if(si==1){
+                        System.out.println("Escribe el codigo de referencia del almacen:\n");
+                        sc.nextLine();
+                        referencia = sc.nextLine();
+                        a=buscarAlmacen(referencia);
+                        p.setAlmacen(a);
+                    }else{
+                        break;
+                    }
                     break;
                 case 3:
-                    //
+                    System.out.println("Escribe el codigo de referencia del almacen:\n");
+                    sc.nextLine();
+                    referencia = sc.nextLine();
+                    listarProductosAlmacen(referencia);
                     break;
                 case 4:
+                    listarProductosCercaDeCaducar();
                     break;
                 case 5:
+                    listarEstadoProductos();
                     break;
                 case 6:
+                    listarProductosLibresCaducados();
                     break;
                 case 7:
                     //Eliminar productos caducados
                     //Comprobar la fecha actual y la fecha de la unidad del producto
                     //Los productos cuya fecha sea menor a la fecha actual ponerlos a null
+                    for(i=0;i<unidades.length;i++){
+                        if(unidades[i].getfCaducidad().compareTo(new Date())==0){
+                            eliminarUnidad(unidades[i].getReferencia());
+                        }
+                    }
                     break;
                 case 8:
                     /*
@@ -199,10 +222,14 @@ public class Principal {
                     }
                     break;
                 case 12:
-                    
-                    break;
-                case 13:
-                    
+                    System.out.println("Escribe el codigo del producto a buscar:\n");
+                    sc.nextLine();
+                    referencia = sc.nextLine();
+                    u = buscarUnidad(referencia);
+                    System.out.println("Escribe el % de descuento:\n");
+                    sc.nextFloat();
+                    descuento = sc.nextInt();
+                    u.setDescuento(descuento);
                     break;
                 case 0:
                     salir = 1;
@@ -213,6 +240,7 @@ public class Principal {
         
         
     }
+//ALMACEN
     public static Almacen buscarAlmacen(String codAlmacen ){
         for (int i=0;i<almacenes.length;i++){
             //Recorremos todos los objetos
@@ -222,7 +250,13 @@ public class Principal {
         }
         return null;
     }
-
+    public static void listarProductosAlmacen(String codAlmacen){
+        int i;
+        for(i=0;i<productos.length;i++){
+            productos[i].toString();
+        }
+    }
+//PRODUCTO
     public static Producto buscarProducto(String referencia){
         int i;
         for (i=0;i<productos.length;i++){
@@ -244,6 +278,7 @@ public class Principal {
                 productos[i].toString();
         }
     }
+//UNIDAD
     public static Unidad buscarUnidad(String referencia){
         int i;
         for(i=0;i<unidades.length;i++){
@@ -254,6 +289,32 @@ public class Principal {
         }
         return null;
     }
+    public static void eliminarUnidad(String referencia){
+        Unidad u;
+        u=buscarUnidad(referencia);
+        u=null;
+    }
+    public static void listarEstadoProductos(){
+        for(int i=0;i<unidades.length;i++){
+            if(unidades[i]!=null)
+                System.out.println(unidades[i].toString());
+        }
+    }
+    public static void listarProductosCercaDeCaducar(){
+        for(int i=0;i<unidades.length;i++){
+            if(unidades[i].getfCaducidad().compareTo(new Date())==0){
+                System.out.println(unidades[i].toString());
+            }
+        }
+    }
+    public static void listarProductosLibresCaducados(){
+        for(int i=0;i<unidades.length;i++){
+            if(unidades[i].getEstadoProducto()==estadoProducto.a && unidades[i].getfCaducidad().compareTo(new Date())>=0){
+                System.out.println(unidades[i].toString());
+            }
+        }
+    }
+//CLIENTE
     public static Cliente buscarCliente(String referencia){
         int i;
         for(i=0;i<clientes.length;i++){
@@ -264,6 +325,8 @@ public class Principal {
         }
         return null;
     }
+//ALBARAN
+    //BUSCAR ALBARAN
 }
 /*
 recorrer(){
