@@ -77,5 +77,10 @@ public class Unidad {
     public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
+
+    @Override
+    public String toString() {
+        return "Unidad{" + "tipoProducto=" + tipoProducto + ", estadoProducto=" + estadoProducto + '}';
+    }
     
 }
