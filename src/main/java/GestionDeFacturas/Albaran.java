@@ -1,27 +1,28 @@
 
 package GestionDeFacturas;
 
+import GestionDeClientes.Cliente;
 import GestionDeProductos.Unidad;
+import com.mycompany.almacen.Principal;
 import java.util.Date;
 
 public class Albaran {
-    private String comprador; //nombreCliente
+    private static int NumAlbaranes;
+    private String referencia;
+    private Cliente comprador;
     private Date fAlbaran;
-    private static int numeroAlbaranes;
-    String refAlbaran;
     private Unidad[] listaProductos;
     private int total;// ToDo: Calcular en funcion de Unidades
 
-    public Albaran(String comprador, Date fAlbaran, Unidad[] listaProductos) {
-        numeroAlbaranes++;
-        this.comprador = comprador;
-        this.fAlbaran = fAlbaran;
-        this.refAlbaran = formatoNAlbaran(numeroAlbaranes);
+    public Albaran(String codCliente, Unidad[] listaProductos) {
+        NumAlbaranes++;
+        this.comprador = Principal.buscarCliente(codCliente);
+        this.fAlbaran = new Date();
+        this.referencia = formatoRefAlbaran(NumAlbaranes);
         this.listaProductos = listaProductos;
-        
     }
     
-    public static String formatoNAlbaran(int numeroReferencia){
+    public static String formatoRefAlbaran(int numeroReferencia){
         String cadenaReferencia = null;
         if(1<=numeroReferencia && numeroReferencia<=9){
             cadenaReferencia="AB-00" + Integer.toString(numeroReferencia);
@@ -33,11 +34,11 @@ public class Albaran {
         return cadenaReferencia;
     }    
     
-    public String getComprador() {
+    public Cliente getComprador() {
         return comprador;
     }
 
-    public void setComprador(String comprador) {
+    public void setComprador(Cliente comprador) {
         this.comprador = comprador;
     }
 
@@ -48,11 +49,6 @@ public class Albaran {
     public void setfAlbaran(Date fAlbaran) {
         this.fAlbaran = fAlbaran;
     }
-    public void setfAlbaran() {
-        this.fAlbaran=new Date(); //instancio un objeto Date para obtener la fecha actual
-        
-    }
-
     public Unidad[] getListaProductos() {
         return listaProductos;
     }
@@ -67,5 +63,13 @@ public class Albaran {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
     }
 }
