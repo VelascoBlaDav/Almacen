@@ -2,6 +2,7 @@
 package GestionDeProductos;
 
 import GestionDeAlmacenes.Almacen;
+import com.mycompany.almacen.Principal;
 import java.util.Date;
 
 public class Unidad {
@@ -14,6 +15,13 @@ public class Unidad {
     private Date fCaducidad;
     private estadoProducto estadoProducto;
 
+    public Unidad(String refProducto, Date fCaducidad){
+        this.tipoProducto=Principal.buscarProducto(refProducto);
+        this.fCaducidad=fCaducidad;
+        this.descuento=0;                       //Por defecto no tiene descuento.
+        this.estadoProducto=estadoProducto.a;   //Por defecto está libre.
+    }
+    
     public Producto getTipoProducto() {
         return tipoProducto;
     }
@@ -36,11 +44,6 @@ public class Unidad {
 
     public void setfCaducidad(Date fCaducidad) {
         this.fCaducidad = fCaducidad;
-    }
-
-
-    public void setLocalizacion(Almacen localizacion) {
-        //ToDo localizacion del producto == localizacion de la unidad
     }
     
     public estadoProducto getEstadoProducto() {
