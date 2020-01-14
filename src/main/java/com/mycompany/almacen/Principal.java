@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 
 public class Principal {
-    private static Almacen[] almacenes = null;
+    private static Almacen[] almacenes = new Almacen[3];
     private static int n, uni, client;
     
     private static Producto[] productos = new Producto[n];
@@ -65,13 +65,13 @@ public class Principal {
                     sc.nextLine();
                     nombreProducto = sc.nextLine();
                     System.out.println("Ancho del producto:\n");
-                    sc.nextFloat();
+                    //sc.nextFloat();
                     ancho = sc.nextFloat();
                     System.out.println("Alto del producto:\n");
-                    sc.nextFloat();
+                    //sc.nextFloat();
                     alto = sc.nextFloat();
                     System.out.println("Precio de compra:\n");
-                    sc.nextFloat();
+                    //sc.nextFloat();
                     pCompra = sc.nextFloat();
                     System.out.println("El codigo de almacen:\n");
                     sc.nextLine();
@@ -84,22 +84,22 @@ public class Principal {
                         }
                     }
                     System.out.println("¿Cuantas unidades quieres añadir al producto?\n");
-                    sc.nextInt();
+                    //sc.nextInt();
                     uni = sc.nextInt();
 
                     System.out.println("Datos de la fecha de caducidad:\n");
                     System.out.println("Introduce el año de caducidad:\n");
-                    sc.nextInt();
+                    //sc.nextInt();
                     año = sc.nextInt();
                     System.out.println("Introduce el mes de caducidad:\n");
-                    sc.nextInt();
+                    //sc.nextInt();
                     mes = sc.nextInt();
                     System.out.println("Introduce el dia de caducidad:\n");
-                    sc.nextInt();
+                    //sc.nextInt();
                     dia = sc.nextInt();
                     fCaducidad= new Date(año, mes, dia);
                     //Crear unidades de producto
-                    for(i=0;i<uni;i++){
+                    for(i=0;i<unidades.length;i++){
                         if(unidades[i]==null){
                             unidades[i] = new Unidad(nombreProducto, fCaducidad);
                             break;
@@ -234,8 +234,8 @@ public class Principal {
                 case 0:
                     salir = 1;
                     break;
-
             }
+            sc.nextLine();
         }while(salir==0);
         
         
