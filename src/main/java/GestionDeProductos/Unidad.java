@@ -10,17 +10,32 @@ public class Unidad {
     El almacen hay que declararlo en el producto y mantenerlo en la unidad
     Todas las unidades tienen que estar en el mismo almacen
     */
+    private static int NumUnidades;
+    private String referencia;
     private Producto tipoProducto;
     private int descuento;
     private Date fCaducidad;
     private estadoProducto estadoProducto;
 
     public Unidad(String refProducto, Date fCaducidad){
+        NumUnidades++;
+        this.referencia=formatoRefUnidad(NumUnidades);
         this.tipoProducto=Principal.buscarProducto(refProducto);
         this.fCaducidad=fCaducidad;
         this.descuento=0;                       //Por defecto no tiene descuento.
         this.estadoProducto=estadoProducto.a;   //Por defecto está libre.
     }
+    public static String formatoRefUnidad(int numeroReferencia){
+        String cadenaReferencia = null;
+        if(1<=numeroReferencia && numeroReferencia<=9){
+            cadenaReferencia="UP-00" + Integer.toString(numeroReferencia);
+        }else if(10<=numeroReferencia && numeroReferencia<=99){
+            cadenaReferencia="UP-0" + Integer.toString(numeroReferencia);
+        }else if(100<=numeroReferencia && numeroReferencia<=999){
+            cadenaReferencia="UP-" + Integer.toString(numeroReferencia);
+        }
+        return cadenaReferencia;
+    }   
     
     public Producto getTipoProducto() {
         return tipoProducto;
@@ -53,6 +68,14 @@ public class Unidad {
 
     public void setEstadoProducto(estadoProducto estadoProducto) {
         this.estadoProducto = estadoProducto;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
     }
     
 }
