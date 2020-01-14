@@ -6,9 +6,9 @@ public class Cliente {
     private String NIF;
     private String direccion;
     private String codCliente;
-    private int credito; //con la compra se reduce, con la devolucion se aumenta
+    private float credito; //con la compra se reduce, con la devolucion se aumenta
 
-    public Cliente(String nombre, String NIF, String direccion, int credito) {
+    public Cliente(String nombre, String NIF, String direccion, float credito) {
         this.nombre = nombre;
         this.NIF = NIF;
         this.direccion = direccion;
@@ -40,11 +40,11 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public int getCredito() {
+    public float getCredito() {
         return credito;
     }
 
-    public void setCredito(int credito) {
+    public void setCredito(float credito) {
         this.credito = credito;
     }
     

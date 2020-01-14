@@ -2,28 +2,30 @@ package com.mycompany.almacen;
 
 import GestionDeAlmacenes.Almacen;
 import GestionDeAlmacenes.tipoAlmacen;
+import GestionDeClientes.Cliente;
 import GestionDeProductos.Producto;
 import GestionDeProductos.Unidad;
 import GestionDeProductos.estadoProducto;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
-import javax.swing.JOptionPane;
 
 
 public class Principal {
     private static Almacen[] almacenes = null;
-    private static int n = 100;
+    private static int n, uni, client;
+    
     private static Producto[] productos = new Producto[n];
+    private static Unidad unidades[] = new Unidad[uni];
+    private static Cliente clientes[] = new Cliente[client];
     public static void main(String args[]){
         
-        String nombreProducto;
+        String nombreProducto, nombre, nif, direccion;
         float ancho, alto;
-        float pCompra;
+        float pCompra,credito;
         float descAplic;
         Date fCaducidad;
         String codAlmacen;//elegir el almacen al que va cada producto
-        int año, mes, dia, var, uni, i, salir = 0;
+        int año, mes, dia, var, i, salir = 0;
         estadoProducto estadoProducto;
         //Creamos los tres almacenes de la empresa,1 de cada tipo.
         almacenes[0] = new Almacen("Seco",tipoAlmacen.a);
@@ -40,13 +42,15 @@ public class Principal {
             System.out.println("0)Salir\n");
             System.out.println("1)Añadir un nuevo producto\n");
             System.out.println("2)Cambiar de almacen a un producto\n");
-            System.out.println("3)Listar el numero de productos en un almacen\n");
-            System.out.println("4)Listar productos que van a caducar\n");
+            System.out.println("3)Listar el numero de unidades de productos en un almacen\n");
+            System.out.println("4)Listar unidades de productos que van a caducar\n");
             System.out.println("5)Listar el estado de los productos\n");
             System.out.println("6)Listar el numero de productos libres caducados\n");
             System.out.println("7)Eliminar productos caducados\n");
             System.out.println("8)Vender producto\n");
             System.out.println("9)Registrar un nuevo cliente\n");
+            System.out.println("10)Listar productos\n");
+            System.out.println("11)Añadir unidades de un producto existente\n");
 
             int opcion = sc.nextInt();
             switch(opcion){
@@ -108,9 +112,11 @@ public class Principal {
                             break;
                     }
                     //Crear unidades de producto
-                    Unidad unidades[] = new Unidad[uni];
                     for(i=0;i<uni;i++){
-                        unidades[i] = new Unidad();
+                        if(unidades[i]==null){
+                            unidades[i] = new Unidad();
+                            break;
+                        }
                     }
                     break;
                 case 2:
@@ -148,7 +154,26 @@ public class Principal {
                     // Funcion venta de producto, recibe una unidad, resta stock y llama a funcion generar albaran.
                     break;
                 case 9:
-                    //Constructor de almacen
+                    //Constructor de cliente
+                    System.out.println("Bienvenido, añada los datos del cliente:\n");
+                    System.out.println("Nombre:\n");
+                    sc.nextLine();
+                    nombre = sc.nextLine();
+                    System.out.println("NIF:\n");
+                    sc.nextLine();
+                    nif = sc.nextLine();
+                    System.out.println("Direccion con esta estructura:(Pais, ciudad, calle, numero, piso, letra)\n");
+                    sc.nextLine();
+                    direccion = sc.nextLine();
+                    System.out.println("Diga su credito en euros:\n");
+                    sc.nextFloat();
+                    credito = sc.nextFloat();
+                    for(i=0;i<client;i++){
+                        if(clientes[i]!=null){
+                            clientes[i] = new Cliente(nombre, nif, direccion, credito);
+                            break;
+                        }
+                    }
                     break;
                     
                 case 0:
@@ -170,17 +195,36 @@ public class Principal {
         return null;
     }
 
-    public Producto buscarProducto(String referencia){
-        for (int i=0;i<n;i++){
+    public static Producto buscarProducto(String referencia){
+        int i;
+        for (i=0;i<productos.length;i++){
             if(productos[i].getReferencia() == referencia){
                 return productos[i];
             }
         }
         return null;
     }
-    public void eliminarProducto(String referencia){
-        Producto P = buscarProducto(referencia);
-        P = null;
+    public static void eliminarProducto(String referencia){
+        Producto p;
+        p=buscarProducto(referencia);
+        p=null;
+    }
+    public static void listarProductos(){
+        int i;
+        for (i=0;i<productos.length;i++){
+            if(productos[i]!=null)
+                productos[i].toString();
+        }
+    }
+    public static Unidad buscarUnidad(String referencia){
+        int i;
+        for(i=0;i<unidades.length;i++){
+            if(unidades[i].getReferencia() == referencia){
+                return unidades[i];
+            }
+            break;
+        }
+        return null;
     }
 }
 /*
