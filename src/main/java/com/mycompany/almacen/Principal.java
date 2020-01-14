@@ -19,7 +19,7 @@ public class Principal {
     private static Cliente clientes[] = new Cliente[client];
     public static void main(String args[]){
         
-        String nombreProducto, nombre, nif, direccion;
+        String nombreProducto, nombre, nif, direccion, referencia = null;
         float ancho, alto;
         float pCompra,credito;
         float descAplic;
@@ -27,6 +27,7 @@ public class Principal {
         String codAlmacen;//elegir el almacen al que va cada producto
         int año, mes, dia, var, i, salir = 0;
         estadoProducto estadoProducto;
+        Producto p;
         //Creamos los tres almacenes de la empresa,1 de cada tipo.
         almacenes[0] = new Almacen("Seco",tipoAlmacen.a);
         almacenes[1] = new Almacen("Humedo",tipoAlmacen.b);
@@ -40,17 +41,19 @@ public class Principal {
             System.out.println("Bienvenido\n");
             System.out.println("¿Que opcion desea realizar?\n\n");
             System.out.println("0)Salir\n");
-            System.out.println("1)Añadir un nuevo producto\n");
-            System.out.println("2)Cambiar de almacen a un producto\n");
+            System.out.println("1)Añadir un nuevo producto\n"); //Completo
+            System.out.println("2)Cambiar de almacen a un producto\n"); 
             System.out.println("3)Listar el numero de unidades de productos en un almacen\n");
             System.out.println("4)Listar unidades de productos que van a caducar\n");
             System.out.println("5)Listar el estado de los productos\n");
             System.out.println("6)Listar el numero de productos libres caducados\n");
             System.out.println("7)Eliminar productos caducados\n");
             System.out.println("8)Vender producto\n");
-            System.out.println("9)Registrar un nuevo cliente\n");
-            System.out.println("10)Listar productos\n");
-            System.out.println("11)Añadir unidades de un producto existente\n");
+            System.out.println("9)Registrar un nuevo cliente\n"); //Completo
+            System.out.println("10)Listar productos\n");//Completo
+            System.out.println("11)Añadir unidades de un producto existente\n");//Completo
+            System.out.println("12)Añadir descuento a un producto\n");
+            System.out.println("13)Añadir descuento a una unidad\n");
 
             int opcion = sc.nextInt();
             switch(opcion){
@@ -106,6 +109,8 @@ public class Principal {
                     //Buscar el producto
                     //Seleccionar el nuevo tipo de almacen segun su codigo
                     //Cambiar el tipo de almacen
+                    p=buscarProducto(referencia);
+                    
                     break;
                 case 3:
                     //
@@ -159,6 +164,45 @@ public class Principal {
                     }
                     break;
                     
+                case 10:
+                    listarProductos();
+                    break;
+                case 11:
+                    System.out.println("Escribe el codigo del producto a buscar:\n");
+                    sc.nextLine();
+                    referencia = sc.nextLine();
+                    p = buscarProducto(referencia);
+                    
+                    nombreProducto=p.getNombre();
+                    System.out.println("¿Cuantas unidades quieres añadir al producto?\n");
+                    sc.nextInt();
+                    uni = sc.nextInt();
+
+                    System.out.println("Datos de la fecha de caducidad:\n");
+                    System.out.println("Introduce el año de caducidad:\n");
+                    sc.nextInt();
+                    año = sc.nextInt();
+                    System.out.println("Introduce el mes de caducidad:\n");
+                    sc.nextInt();
+                    mes = sc.nextInt();
+                    System.out.println("Introduce el dia de caducidad:\n");
+                    sc.nextInt();
+                    dia = sc.nextInt();
+                    fCaducidad= new Date(año, mes, dia);
+                    //Crear unidades de producto
+                    for(i=0;i<uni;i++){
+                        if(unidades[i]==null){
+                            unidades[i] = new Unidad(nombreProducto, fCaducidad);
+                            break;
+                        }
+                    }
+                    break;
+                case 12:
+                    
+                    break;
+                case 13:
+                    
+                    break;
                 case 0:
                     salir = 1;
                     break;
@@ -204,6 +248,16 @@ public class Principal {
         for(i=0;i<unidades.length;i++){
             if(unidades[i].getReferencia() == referencia){
                 return unidades[i];
+            }
+            break;
+        }
+        return null;
+    }
+    public static Cliente buscarCliente(String referencia){
+        int i;
+        for(i=0;i<clientes.length;i++){
+            if(clientes[i].getCodCliente() == referencia){
+                return clientes[i];
             }
             break;
         }
