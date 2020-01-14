@@ -23,11 +23,9 @@ public class Principal {
         String nombreProducto, nombre, nif, direccion, referencia = null;
         float ancho, alto;
         float pCompra,credito;
-        float descAplic;
         Date fCaducidad;
         String codAlmacen;//elegir el almacen al que va cada producto
-        int año, mes, dia, var, i, salir = 0, si, descuento;
-        estadoProducto estadoProducto;
+        int año, mes, dia, i, salir = 0, si, descuento;
         Producto p;
         Almacen a;
         Unidad u;
@@ -56,8 +54,7 @@ public class Principal {
             System.out.println("9)Registrar un nuevo cliente\n"); //Completo
             System.out.println("10)Listar productos\n");//Completo
             System.out.println("11)Añadir unidades de un producto existente\n");//Completo
-            System.out.println("12)Añadir descuento a un producto\n");
-            System.out.println("13)Añadir descuento a una unidad\n");
+            System.out.println("12)Añadir descuento a una unidad\n");
 
             int opcion = sc.nextInt();
             switch(opcion){
@@ -234,12 +231,6 @@ public class Principal {
                     descuento = sc.nextInt();
                     u.setDescuento(descuento);
                     break;
-                case 13:
-                    System.out.println("Escribe el codigo del producto a buscar:\n");
-                    sc.nextLine();
-                    referencia = sc.nextLine();
-                    p = buscarProducto(referencia);
-                    break;
                 case 0:
                     salir = 1;
                     break;
@@ -261,7 +252,6 @@ public class Principal {
     }
     public static void listarProductosAlmacen(String codAlmacen){
         int i;
-        Almacen a = buscarAlmacen(codAlmacen);
         for(i=0;i<productos.length;i++){
             productos[i].toString();
         }
