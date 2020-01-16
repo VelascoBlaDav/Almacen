@@ -99,10 +99,6 @@ public class Producto {
     public void setDescAplic(float descAplic) {
         this.descAplic = descAplic;
     }
-    
-    
-    //Agregar productos a un almacen concreto
-    //Mover producto de un almacen a otro
 
     @Override
     public String toString() {

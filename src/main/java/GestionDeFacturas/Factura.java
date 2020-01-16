@@ -3,6 +3,7 @@ package GestionDeFacturas;
 
 import GestionDeClientes.Cliente;
 import GestionDeProductos.Unidad;
+import com.mycompany.almacen.Principal;
 import java.util.Date;
 
 public class Factura {

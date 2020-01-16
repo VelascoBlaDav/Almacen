@@ -3,6 +3,7 @@ package com.mycompany.almacen;
 import GestionDeAlmacenes.Almacen;
 import GestionDeAlmacenes.tipoAlmacen;
 import GestionDeClientes.Cliente;
+import GestionDeFacturas.Albaran;
 import GestionDeProductos.Producto;
 import GestionDeProductos.Unidad;
 import GestionDeProductos.estadoProducto;
@@ -136,8 +137,8 @@ public class Principal {
                 case 0:
                     salir = 1;
                     break;
-
             }
+            sc.nextLine();
         }while(salir==0);
         
         
