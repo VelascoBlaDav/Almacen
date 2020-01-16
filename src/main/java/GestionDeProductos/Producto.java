@@ -100,6 +100,10 @@ public class Producto {
         this.descAplic = descAplic;
     }
 
+
+    //Agregar productos a un almacen concreto
+    //Mover producto de un almacen a otro
+    
     @Override
     public String toString() {
         return "Producto:" + "referencia=" + referencia + ", nombre=" + nombre + ", pCompra=" + pCompra + ", pVenta=" + pVenta;
