@@ -5,6 +5,7 @@ import GestionDeAlmacenes.Almacen;
 import GestionDeAlmacenes.tipoAlmacen;
 import GestionDeClientes.Cliente;
 import GestionDeFacturas.Albaran;
+import GestionDeFacturas.Factura;
 import GestionDeProductos.Producto;
 import GestionDeProductos.Unidad;
 import GestionDeProductos.estadoProducto;
@@ -20,6 +21,7 @@ public class Principal {
     private static ArrayList<Unidad> unidades = new ArrayList<Unidad>();
     private static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     private static ArrayList<Albaran> albaranes = new ArrayList<Albaran>();
+    private static ArrayList<Factura> facturas = new ArrayList<Factura>();
     
     public static void main(String args[]){
         String referencia = null;
@@ -49,12 +51,19 @@ public class Principal {
             System.out.println("9)Registrar un nuevo cliente\n"); //Completo
             System.out.println("10)Listar productos\n");//Completo
             System.out.println("11)Añadir unidades de un producto existente\n");//Completo
-            System.out.println("12)Añadir descuento a una unidad\n");
+            System.out.println("12)Añadir descuento a una unidad\n");//Completo
+            System.out.println("13)Añadir un nuevo albaran\n");//Completo
+            System.out.println("14)Crear una factura por albaran\n");//Completo
+            System.out.println("15)Listar facturas pendientes de cobro\n");
+            System.out.println("16)Listar facturas de un cliente\n");
+            System.out.println("17)Listar el stock de un producto\n");
+            System.out.println("18)Añadir unidades de un producto\n");
 
             int opcion = Lectura.entero();
             switch(opcion){
                 case 1:
                     menuAddProducto();
+                    
                     break;
                 case 2:
                     menuMoverProducto();
@@ -85,19 +94,8 @@ public class Principal {
                     }
                     break;
                 case 8:
-                    /*
-                    Despues de una venta hay que hacer todas estas operaciones
-                    - Obtener un listado de los productos.
-                    - Obtener un listado de Albaranes. 
-                    - Obtener un listado de productos buscados a partir de un precio de venta mayor a una cantidad
-                    - Obtener un listado de albaranes generados en una fecha concreta.
-                    - Obtener la suma total económica de productos vendidos. 
-                    - Obtener un listado de las facturas pendientes de cobro. 
-                    - Obtener un listado detallado de facturas de un cliente 
-                    - Cuanto Stock tenemos de un producto concreto.
-                    */
-
                     // Funcion venta de producto, recibe una unidad, resta stock y llama a funcion generar albaran.
+                    
                     break;
                 case 9:
                     menuAddCliente();
@@ -118,6 +116,24 @@ public class Principal {
                     sc.nextFloat();
                     descuento = sc.nextInt();
                     u.setDescuento(descuento);
+                    break;
+                case 13:
+                    menuAddAlbaran();
+                    break;
+                case 14:
+                    menuAddFactura();
+                    break;
+                case 15:
+                    listarFacturasPendientes();
+                    break;
+                case 16:
+                    listarFacturas(); //de un cliente concreto
+                    break;
+                case 17:
+                    //Listar las unidades de un producto concreto
+                    break;
+                case 18:
+                    menuAddUnidad();
                     break;
                 case 0:
                     salir = 1;
@@ -164,6 +180,14 @@ public class Principal {
             System.out.println(productos.get(i).toString());
         }
     }
+    public static void listarProductos(float precio){
+        int i;
+        for (i=0;i<productos.size();i++){
+            if(productos.get(i).getpVenta() >= precio){
+                productos.get(i).toString();
+            }
+        }
+    }
 //UNIDAD
     public static Unidad buscarUnidad(String referencia){
         int i;
@@ -198,6 +222,17 @@ public class Principal {
             }
         }
     }
+    public static void listarUnidades(){
+        for(int i=0;i<unidades.size();i++){
+            System.out.println(unidades.get(i).toString());
+        }
+    }
+    //venta
+    public static void venderProductos(String referencia){
+        buscarUnidad(referencia);
+        //Primero se genera un albaran
+        
+    }
 //CLIENTE
     public static Cliente buscarCliente(String referencia){
         int i;
@@ -208,8 +243,13 @@ public class Principal {
         }
         return null;
     }
+    public static void listarCliente(){
+        int i;
+        for(i=0;i<clientes.size();i++){
+            clientes.toString();
+        }
+    }
 //ALBARAN
-    //BUSCAR ALBARAN
     public static Albaran buscarAlbaran(String referencia ){
         for (int i=0;i<albaranes.size();i++){
             if(albaranes.get(i).getReferencia().equals(referencia)){
@@ -218,7 +258,33 @@ public class Principal {
         }
         return null;
     }
+    public static void listarAlbaran(){
+        albaranes.toString();
+    }
+    public static void listarAlbaran(Date fecha){
+        for(int i=0;i<clientes.size();i++){
+            if(albaranes.get(i).getfAlbaran().equals(fecha)){
+                albaranes.get(i).toString();
+            }
+        }
+    }
+//FACTURAS
+    public static Factura buscarFactura(String referencia ){
+        for (int i=0;i<facturas.size();i++){
+            if(albaranes.get(i).getReferencia().equals(referencia)){
+                return facturas.get(i);
+            }
+        }
+        return null;
+    }
+    public static void listarFacturasPendientes(){
+        facturas.toString();
+    }
+    public static void listarFacturas(){
+        facturas.toString();
+    }
     
+     
     
     
 //MENUS
@@ -320,6 +386,64 @@ public class Principal {
         //Crear unidades de producto
         addUnidad(uni,new Unidad(refProducto, fCaducidad));
     }
+    public static void menuAddAlbaran(){
+        Scanner sc = new Scanner (System.in);
+        String codCliente;
+        String referencia;
+        Unidad uni[] = null;
+        int i;
+        
+        System.out.println("La lista de clientes es esta:\n");
+        listarCliente();
+        System.out.println("Seleccione el cliente:\n");
+        codCliente = sc.nextLine();
+        buscarCliente(codCliente);
+        System.out.println("Las unidades disponibles son estas:\n");
+        listarUnidades();
+
+        for(i=0;i<1000000;i++){
+            System.out.println("Escribe el codigo de la unidad a añadir:\n");
+            referencia = sc.nextLine();
+            uni[i]=buscarUnidad(referencia);
+            System.out.println("¿Quieres añadir algun producto mas?(1-si,0-no");
+            int salida = sc.nextInt();
+            if(salida==0)
+                break;
+        }
+        addAlbaran(new Albaran(codCliente, uni));
+    }
+    public static void menuAddFactura(){
+        Scanner sc = new Scanner (System.in);
+        String referencia;
+        
+        System.out.println("La lista de albaranes es esta:\n");
+        listarAlbaran();
+        System.out.println("Seleccione el albaran:\n");
+        referencia = sc.nextLine();
+        addFactura(new Factura(referencia));
+    }
+    public static void menuVenta(Albaran albaran){
+        Date fecha = null;
+        float precio = 0;
+        
+        /*
+        Despues de una venta hay que hacer todas estas operaciones
+        - Obtener un listado de los productos.
+        - Obtener un listado de Albaranes. 
+        - Obtener un listado de productos buscados a partir de un precio de venta mayor a una cantidad
+        - Obtener un listado de albaranes generados en una fecha concreta.
+        - Obtener la suma total económica de productos vendidos. 
+        - Obtener un listado de las facturas pendientes de cobro. 
+        - Obtener un listado detallado de facturas de un cliente 
+        - Cuanto Stock tenemos de un producto concreto.
+        */
+        listarUnidades();
+        listarAlbaran();
+        listarProductos(precio);
+        listarAlbaran(fecha);
+        listarFacturasPendientes();
+        //totalVenta();
+    }
     public static void addUnidad(int nUnidades, Unidad unidad){
         int i;
         for(i=0;i<nUnidades;i++){
@@ -331,7 +455,13 @@ public class Principal {
     }
     public static void addCliente(Cliente cliente){
         clientes.add(cliente);
-    }       
+    }
+    public static void addAlbaran(Albaran albaran){
+        albaranes.add(albaran);
+    }
+    public static void addFactura(Factura factura){
+        facturas.add(factura);
+    }
 }
 /*
 recorrer(){
