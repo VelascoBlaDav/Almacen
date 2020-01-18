@@ -7,6 +7,7 @@ import GestionDeAlmacenes.tipoAlmacen;
 import GestionDeClientes.Cliente;
 import GestionDeFacturas.Albaran;
 import GestionDeFacturas.Factura;
+import GestionDeFacturas.estadoFactura;
 import GestionDeProductos.Producto;
 import GestionDeProductos.Unidad;
 import GestionDeProductos.estadoProducto;
@@ -47,12 +48,15 @@ public class Principal {
             System.out.println("12)Cambiar el descuento de una unidad\n");//Completo
             System.out.println("13)Añadir un nuevo albaran\n");//Completo
             System.out.println("14)Crear una factura por albaran\n");//Completo
-            System.out.println("15)Listar facturas pendientes de cobro\n");
-            System.out.println("16)Listar facturas de un cliente\n");
-            System.out.println("17)Listar el stock de un producto\n");
+            System.out.println("15)Listar facturas pendientes de cobro\n");//Completo
+            System.out.println("16)Listar facturas\n");//Completo
+            System.out.println("17)Listar el stock de un producto\n");//Completo
             System.out.println("18)Añadir unidades de un producto\n");//Completo
             System.out.println("19)Añadir unidades a un albaran\n");//Completo
             System.out.println("20)Imprimir albaran\n");//Completo
+            System.out.println("21)Imprimir factura\n");//Completo
+            System.out.println("22)Listar facturas de un cliente\n");//Completo
+            System.out.println("23)Listar el stock completo\n");//Completo
 
             int opcion = Lectura.entero();
             switch(opcion){
@@ -103,10 +107,10 @@ public class Principal {
                     listarFacturasPendientes();
                     break;
                 case 16:
-                    listarFacturas(); //de un cliente concreto
+                    listarFacturas();
                     break;
                 case 17:
-                    //Listar las unidades de un producto concreto
+                    menuListarStockProducto();
                     break;
                 case 18:
                     menuAddUnidad();
@@ -116,6 +120,15 @@ public class Principal {
                     break;
                 case 20:
                     menuImprimirAlbaran();
+                    break;
+                case 21:
+                    menuImprimirFactura();
+                    break;
+                case 22:
+                    menuListarFacturasCliente();
+                    break;
+                case 23:
+                    listarStock();
                     break;
                 case 0:
                     salir = 1;
@@ -257,11 +270,24 @@ public class Principal {
         }
         return null;
     }
-    public static void listarFacturasPendientes(){
-        facturas.toString();
+    public static void listarFacturasPendientes(){  //No cobradas
+        for(int i=0;i<facturas.size();i++){
+            if(facturas.get(i).getEstadoFactura().equals(estadoFactura.a)){
+                System.out.println(facturas.get(i).toString());
+            }
+        }
     }
-    public static void listarFacturas(){
-        facturas.toString();
+    public static void listarFacturas(){    //Todas las facturas
+        for(int i=0;i<facturas.size();i++){
+            System.out.println(facturas.get(i).toString());
+        }
+    }
+    public static void listarFacturas(Cliente cliente){ //Del cliente seleccionado
+        for(int i=0;i<facturas.size();i++){
+            if(facturas.get(i).getComprador().equals(cliente)){
+                System.out.println(facturas.get(i).toString());
+            }
+        }
     }
      
 //MENUS
@@ -335,6 +361,29 @@ public class Principal {
 
         addProducto(new Producto(nombreProducto, ancho, alto, pCompra, codAlmacen));
     }
+    public static void menuListarStockProducto(){
+        String referencia;
+        System.out.println("El listado de productos es este:\n");
+        listarProductos();
+        System.out.println("Escribe el codigo del producto a listar:\n");
+        referencia=Lectura.cadena();
+        listarStock(buscarProducto(referencia));
+    }
+    public static void listarStock(){
+        for(int i=0;i<unidades.size();i++){
+            if(unidades.get(i).getEstadoProducto().equals(estadoProducto.a)){   //Lista unidades libres
+                System.out.println(unidades.get(i).toString());
+            }
+        }
+    }
+    public static void listarStock(Producto producto){
+        for(int i=0;i<unidades.size();i++){
+            if(unidades.get(i).getEstadoProducto().equals(estadoProducto.a) &&  //Lista unidades libres
+                    unidades.get(i).getTipoProducto().equals(producto)){        //Lista unidades del tipo de producto
+                System.out.println(unidades.get(i).toString());
+            }
+        }
+    }
     public static void menuAddUnidad(){
         int unidades;
         Date fCaducidad;
@@ -365,6 +414,14 @@ public class Principal {
         String referencia=Lectura.cadena();
         buscarAlbaran(referencia).imprimirAlbaran();
     }
+    public static void menuImprimirFactura(){
+        System.out.println("La lista de facturas es esta:\n");
+        listarFacturas();
+        
+        System.out.println("Introduce la referencia de la factura:\n");
+        String referencia=Lectura.cadena();
+        buscarFactura(referencia).imprimirFactura();
+    }
     public static void menuAddAlbaran(){
         String codCliente,refAlbaran,refUnidad;
         boolean salir=false;
@@ -375,7 +432,6 @@ public class Principal {
         listarCliente();
         System.out.println("Introduzca el código del cliente:\n");
         codCliente = Lectura.cadena();
-        buscarCliente(codCliente);
         //Generamos un nuevo albaran al cliente
         refAlbaran=addAlbaran(new Albaran(codCliente));
         
@@ -437,6 +493,16 @@ public class Principal {
         System.out.println("Escribe el codigo de referencia del almacen:\n");
         String referencia = Lectura.cadena();
         listarProductosAlmacen(referencia);
+    }
+    public static void menuListarFacturasCliente(){
+        String codCliente;
+        Cliente cliente;
+        System.out.println("La lista de clientes es esta:\n");
+        listarCliente();
+        System.out.println("Introduzca el código del cliente:\n");
+        codCliente = Lectura.cadena();
+        cliente=buscarCliente(codCliente);
+        listarFacturas(cliente);
     }
     public static void borrarProductosCaducados(){
         for(int i=0;i<unidades.size();i++){

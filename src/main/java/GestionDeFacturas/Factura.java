@@ -27,7 +27,6 @@ public class Factura {
         this.listaProductos=albaran.getListaProductos();
         this.total=albaran.calcularTotal();
         
-        
     }
     public static String formatoRefFactura(int numeroReferencia){
         String cadenaReferencia = null;
@@ -40,7 +39,32 @@ public class Factura {
         }
         return cadenaReferencia;
     }
-    
+    public void imprimirFactura(){
+            System.out.println("---Factura---\n");
+            System.out.println("Número de factura: "+getReferencia());
+            System.out.println("Nombre del cliente: "+getComprador().getNombre());
+            System.out.println("NIF del cliente: "+getComprador().getNIF());
+            System.out.println("Fecha de la factura: "+getfFactura());
+            System.out.println("Productos: ");
+            for(int i=0;i<listaProductos.size();i++){
+                System.out.println(listaProductos.get(i).toString());
+            }
+            System.out.println("Total: "+total);
+            System.out.print("Estado: ");
+            if(estadoFactura.equals(estadoFactura.a)){
+                System.out.println("Pendiente de cobro");
+            }else if(estadoFactura.equals(estadoFactura.b)){
+                System.out.println("Cobro realizado");
+                System.out.print("Forma de pago: ");
+                if(formaPago.equals(formaPago.a)){
+                    System.out.println("Al contado");
+                }else if(formaPago.equals(formaPago.b)){
+                    System.out.println("Con talón");
+                }
+            }
+            System.out.println("Observaciones: "+observaciones);
+
+    }
     public String getReferencia() {
         return referencia;
     }
@@ -67,10 +91,6 @@ public class Factura {
 
     public ArrayList<Unidad> getListaProductos() {
         return listaProductos;
-    }
-
-    public void setListaProductos(ArrayList<Unidad> listaProductos) {
-        this.listaProductos = listaProductos;
     }
 
     public float getTotal() {
@@ -104,6 +124,10 @@ public class Factura {
     public void setEstadoFactura(estadoFactura estadoFactura) {
         this.estadoFactura = estadoFactura;
     }
-
-    
+    @Override
+    public String toString() {
+        return "Factura:" + "referencia=" + referencia + ", comprador=" + comprador.getNombre() +
+                ", fecha=" + fFactura + ", total=" + total + ", observaciones=" + observaciones +
+                ", forma de pago=" + formaPago + ", estado=" + estadoFactura;
+    }    
 }

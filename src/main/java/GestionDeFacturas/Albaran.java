@@ -81,5 +81,8 @@ public class Albaran {
     public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
-    
+    @Override
+    public String toString() {
+        return "Albaran:" + "referencia=" + referencia + ", comprador=" + comprador.getNombre() + ", fecha=" + fAlbaran + ", total=" + calcularTotal() ;
+    }    
 }
