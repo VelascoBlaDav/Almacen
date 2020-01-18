@@ -53,4 +53,12 @@ public class Lectura {
         }
         return fecha;
     }
+    public static boolean booleanoNumerico(){
+        int entero=entero();
+        if(entero==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

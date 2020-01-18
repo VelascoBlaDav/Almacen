@@ -1,5 +1,6 @@
 package com.mycompany.almacen;
 
+import Funciones.Calculo;
 import Funciones.Lectura;
 import GestionDeAlmacenes.Almacen;
 import GestionDeAlmacenes.tipoAlmacen;
@@ -11,9 +12,6 @@ import GestionDeProductos.Unidad;
 import GestionDeProductos.estadoProducto;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
-
-
 
 public class Principal {
     private static ArrayList<Almacen> almacenes = new ArrayList<Almacen>();
@@ -24,18 +22,13 @@ public class Principal {
     private static ArrayList<Factura> facturas = new ArrayList<Factura>();
     
     public static void main(String args[]){
-        String referencia = null;
-        int i, salir = 0, descuento;
-        Unidad u;
+        int salir = 0;
         
         //Creamos los tres almacenes de la empresa,1 de cada tipo.
         almacenes.add(new Almacen("Seco",tipoAlmacen.a));
-        almacenes.add(new Almacen("Seco",tipoAlmacen.b));
-        almacenes.add(new Almacen("Seco",tipoAlmacen.c));       
-        
-        
-        Scanner sc = new Scanner (System.in);
-        
+        almacenes.add(new Almacen("Humedo",tipoAlmacen.b));
+        almacenes.add(new Almacen("Congelado",tipoAlmacen.c));       
+                
         do{
             System.out.println("Bienvenido\n");
             System.out.println("¿Que opción desea realizar?\n\n");
@@ -51,28 +44,26 @@ public class Principal {
             System.out.println("9)Registrar un nuevo cliente\n"); //Completo
             System.out.println("10)Listar productos\n");//Completo
             System.out.println("11)Añadir unidades de un producto existente\n");//Completo
-            System.out.println("12)Añadir descuento a una unidad\n");//Completo
+            System.out.println("12)Cambiar el descuento de una unidad\n");//Completo
             System.out.println("13)Añadir un nuevo albaran\n");//Completo
             System.out.println("14)Crear una factura por albaran\n");//Completo
             System.out.println("15)Listar facturas pendientes de cobro\n");
             System.out.println("16)Listar facturas de un cliente\n");
             System.out.println("17)Listar el stock de un producto\n");
-            System.out.println("18)Añadir unidades de un producto\n");
+            System.out.println("18)Añadir unidades de un producto\n");//Completo
+            System.out.println("19)Añadir unidades a un albaran\n");//Completo
+            System.out.println("20)Imprimir albaran\n");//Completo
 
             int opcion = Lectura.entero();
             switch(opcion){
                 case 1:
                     menuAddProducto();
-                    
                     break;
                 case 2:
                     menuMoverProducto();
                     break;
                 case 3:
-                    System.out.println("Escribe el codigo de referencia del almacen:\n");
-                    sc.nextLine();
-                    referencia = sc.nextLine();
-                    listarProductosAlmacen(referencia);
+                    menuListarUnidadesEnAlmacen();
                     break;
                 case 4:
                     listarProductosCercaDeCaducar();
@@ -84,14 +75,7 @@ public class Principal {
                     listarProductosLibresCaducados();
                     break;
                 case 7:
-                    //Eliminar productos caducados
-                    //Comprobar la fecha actual y la fecha de la unidad del producto
-                    //Los productos cuya fecha sea menor a la fecha actual ponerlos a null
-                    for(i=0;i<unidades.size();i++){
-                        if(unidades.get(i).getfCaducidad().compareTo(new Date())==0){
-                            eliminarUnidad(unidades.get(i).getReferencia());
-                        }
-                    }
+                    borrarProductosCaducados();
                     break;
                 case 8:
                     // Funcion venta de producto, recibe una unidad, resta stock y llama a funcion generar albaran.
@@ -100,7 +84,6 @@ public class Principal {
                 case 9:
                     menuAddCliente();
                     break;
-                    
                 case 10:
                     listarProductos();
                     break;
@@ -108,14 +91,7 @@ public class Principal {
                     menuAddUnidad();
                     break;
                 case 12:
-                    System.out.println("Escribe el codigo del producto a buscar:\n");
-                    sc.nextLine();
-                    referencia = sc.nextLine();
-                    u = buscarUnidad(referencia);
-                    System.out.println("Escribe el % de descuento:\n");
-                    sc.nextFloat();
-                    descuento = sc.nextInt();
-                    u.setDescuento(descuento);
+                    menuCambiarDescuentoUnidad();
                     break;
                 case 13:
                     menuAddAlbaran();
@@ -135,10 +111,15 @@ public class Principal {
                 case 18:
                     menuAddUnidad();
                     break;
+                case 19:
+                    menuAddUnidadesAlbaran();
+                    break;
+                case 20:
+                    menuImprimirAlbaran();
+                    break;
                 case 0:
                     salir = 1;
                     break;
-
             }
         }while(salir==0);
         
@@ -199,9 +180,7 @@ public class Principal {
         return null;
     }
     public static void eliminarUnidad(String referencia){
-        Unidad u;
-        u=buscarUnidad(referencia);
-        u=null;
+        unidades.remove(buscarUnidad(referencia));
     }
     public static void listarEstadoProductos(){
         for(int i=0;i<unidades.size();i++){
@@ -210,14 +189,15 @@ public class Principal {
     }
     public static void listarProductosCercaDeCaducar(){
         for(int i=0;i<unidades.size();i++){
-            if(unidades.get(i).getfCaducidad().compareTo(new Date())==0){
+            if(Calculo.diasRestantes(unidades.get(i).getfCaducidad()) <7){  //Queda menos de 1 semana para que caduquen.
                 System.out.println(unidades.get(i).toString());
             }
         }
     }
     public static void listarProductosLibresCaducados(){
         for(int i=0;i<unidades.size();i++){
-            if(unidades.get(i).getEstadoProducto() == estadoProducto.a && unidades.get(i).getfCaducidad().compareTo(new Date())>=0){
+            if(unidades.get(i).getEstadoProducto() == estadoProducto.a              //Libres
+                    && Calculo.diasRestantes(unidades.get(i).getfCaducidad())<0){   //Caducados
                 System.out.println(unidades.get(i).toString());
             }
         }
@@ -283,11 +263,16 @@ public class Principal {
     public static void listarFacturas(){
         facturas.toString();
     }
-    
      
-    
-    
 //MENUS
+    public static void menuCambiarDescuentoUnidad(){
+        System.out.println("Escribe el codigo del producto a buscar:\n");
+        String referencia = Lectura.cadena();
+        Unidad uni = buscarUnidad(referencia);
+        System.out.println("Escribe el % de descuento:\n");
+        int descuento = Lectura.entero();
+        uni.setDescuento(descuento);
+    }
     public static void menuMoverProducto(){
         //Buscar el producto
         //Seleccionar el nuevo tipo de almacen segun su codigo
@@ -317,7 +302,6 @@ public class Principal {
     public static void menuAddCliente(){
         String nombre, nif, direccion;
         float credito;
-        Scanner sc = new Scanner (System.in);
 
         System.out.println("-Añadir nuevo cliente-\n");
         System.out.println("Nombre completo:\n");
@@ -335,7 +319,6 @@ public class Principal {
     public static void menuAddProducto(){
         String nombreProducto,codAlmacen;
         float ancho, alto,pCompra;
-        Scanner sc = new Scanner (System.in);
 
         System.out.println("-Añadir nuevo producto-\n");
         System.out.println("Escribe el nombre del producto:\n");
@@ -349,77 +332,83 @@ public class Principal {
         System.out.println("El codigo de almacen (AL-1xxx):\n");
         codAlmacen = Lectura.cadena();
 
-        //Añado el producto al array
+
         addProducto(new Producto(nombreProducto, ancho, alto, pCompra, codAlmacen));
     }
     public static void menuAddUnidad(){
-        int uni, año, mes, dia;
+        int unidades;
         Date fCaducidad;
         String refProducto;
-        Scanner sc = new Scanner (System.in);
         
         System.out.println("-Añadir unidades de producto-\n");
-        
         //System.out.println("Selecciona el producto:\n");
-        //TODO: Lista de productos
-        
+        //TODO: Lista de productos       
         System.out.println("Escribe el codigo del producto a buscar:\n");
-        sc.nextLine();
-        refProducto = sc.nextLine();                   
-        
+        refProducto = Lectura.cadena();
         System.out.println("¿Cuantas unidades quieres añadir?\n");
-        sc.nextInt();
-        uni = sc.nextInt();
+        unidades = Lectura.entero();
 
-        System.out.println("Datos de la fecha de caducidad:\n");
-        System.out.println("Introduce el dia de caducidad:\n");
-        sc.nextInt();
-        dia = sc.nextInt();
-        System.out.println("Introduce el mes de caducidad:\n");
-        sc.nextInt();
-        mes = sc.nextInt();
-        System.out.println("Introduce el año de caducidad:\n");
-        sc.nextInt();
-        año = sc.nextInt();
-
-        fCaducidad= new Date(año, mes, dia);
+        System.out.println("Introduce la fecha de caducidad (formato dd/mm/yyyy):\n");
+        fCaducidad=Lectura.fecha();
         //Crear unidades de producto
-        addUnidad(uni,new Unidad(refProducto, fCaducidad));
+        addUnidad(unidades,new Unidad(refProducto, fCaducidad));
+    }
+    public static void menuAddUnidadesAlbaran(){
+        System.out.println("Introduce la referencia del albaran:\n");
+        String refAlbaran=Lectura.cadena();
+        System.out.println("Introduce la referencia de la unidad a añadir:\n");
+        String refUnidad=Lectura.cadena();
+        buscarAlbaran(refAlbaran).addUnidad(buscarUnidad(refUnidad));
+    }
+    public static void menuImprimirAlbaran(){
+        System.out.println("Introduce la referencia del albaran:\n");
+        String referencia=Lectura.cadena();
+        buscarAlbaran(referencia).imprimirAlbaran();
     }
     public static void menuAddAlbaran(){
-        Scanner sc = new Scanner (System.in);
-        String codCliente;
-        String referencia;
-        Unidad uni[] = null;
-        int i;
+        String codCliente,refAlbaran,refUnidad;
+        boolean salir=false;
+        boolean imprimir;
+        Albaran albaran;
         
         System.out.println("La lista de clientes es esta:\n");
         listarCliente();
-        System.out.println("Seleccione el cliente:\n");
-        codCliente = sc.nextLine();
+        System.out.println("Introduzca el código del cliente:\n");
+        codCliente = Lectura.cadena();
         buscarCliente(codCliente);
-        System.out.println("Las unidades disponibles son estas:\n");
-        listarUnidades();
-
-        for(i=0;i<1000000;i++){
+        //Generamos un nuevo albaran al cliente
+        refAlbaran=addAlbaran(new Albaran(codCliente));
+        
+        albaran=buscarAlbaran(refAlbaran);
+        //Añadimos unidades al albaran
+        while(!salir){
+            System.out.println("Las unidades disponibles son estas:\n");
+            listarUnidades();
             System.out.println("Escribe el codigo de la unidad a añadir:\n");
-            referencia = sc.nextLine();
-            uni[i]=buscarUnidad(referencia);
-            System.out.println("¿Quieres añadir algun producto mas?(1-si,0-no");
-            int salida = sc.nextInt();
-            if(salida==0)
-                break;
+            refUnidad=Lectura.cadena();
+            albaran.addUnidad(buscarUnidad(refUnidad));
+            System.out.println("¿Quieres añadir más productos?");
+            System.out.println("0) No");
+            System.out.println("1) Si");
+            salir=Lectura.booleanoNumerico();
         }
-        addAlbaran(new Albaran(codCliente, uni));
+        
+        System.out.println("¿Desea imprimir el albarán?");
+        System.out.println("0) No");
+        System.out.println("1) Si");
+        imprimir=Lectura.booleanoNumerico();
+        if(imprimir){
+            albaran.imprimirAlbaran();
+        }
+        
     }
     public static void menuAddFactura(){
-        Scanner sc = new Scanner (System.in);
         String referencia;
         
         System.out.println("La lista de albaranes es esta:\n");
         listarAlbaran();
         System.out.println("Seleccione el albaran:\n");
-        referencia = sc.nextLine();
+        referencia = Lectura.cadena();
         addFactura(new Factura(referencia));
     }
     public static void menuVenta(Albaran albaran){
@@ -444,23 +433,40 @@ public class Principal {
         listarFacturasPendientes();
         //totalVenta();
     }
+    public static void menuListarUnidadesEnAlmacen(){
+        System.out.println("Escribe el codigo de referencia del almacen:\n");
+        String referencia = Lectura.cadena();
+        listarProductosAlmacen(referencia);
+    }
+    public static void borrarProductosCaducados(){
+        for(int i=0;i<unidades.size();i++){
+            if(Calculo.diasRestantes(unidades.get(i).getfCaducidad())<0){
+                //Producto caducado
+                eliminarUnidad(unidades.get(i).getReferencia());
+            }
+        }
+    }
     public static void addUnidad(int nUnidades, Unidad unidad){
         int i;
         for(i=0;i<nUnidades;i++){
             unidades.add(unidad); 
         }
     }
-    public static void addProducto(Producto producto){
+    public static String addProducto(Producto producto){
         productos.add(producto);
+        return producto.getReferencia();
     }
-    public static void addCliente(Cliente cliente){
+    public static String addCliente(Cliente cliente){
         clientes.add(cliente);
+        return cliente.getCodCliente();
     }
-    public static void addAlbaran(Albaran albaran){
+    public static String addAlbaran(Albaran albaran){
         albaranes.add(albaran);
+        return albaran.getReferencia();
     }
-    public static void addFactura(Factura factura){
+    public static String addFactura(Factura factura){
         facturas.add(factura);
+        return factura.getReferencia();
     }
 }
 /*
