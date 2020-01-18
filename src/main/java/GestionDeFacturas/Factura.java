@@ -4,6 +4,7 @@ package GestionDeFacturas;
 import GestionDeClientes.Cliente;
 import GestionDeProductos.Unidad;
 import com.mycompany.almacen.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Factura {
@@ -11,8 +12,8 @@ public class Factura {
     private String referencia;
     private Cliente comprador;
     private Date fFactura;
-    private Unidad[] listaProductos;
-    private int total;// ToDo: Calcular en funcion de Unidades
+    private ArrayList<Unidad> listaProductos;
+    private float total;// ToDo: Calcular en funcion de Unidades
     private String observaciones;
     private formaPago formaPago;
     private estadoFactura estadoFactura;
@@ -24,7 +25,7 @@ public class Factura {
         this.comprador=albaran.getComprador();
         this.fFactura=albaran.getfAlbaran();
         this.listaProductos=albaran.getListaProductos();
-        this.total=albaran.getTotal();
+        this.total=albaran.calcularTotal();
         
         
     }
@@ -64,19 +65,19 @@ public class Factura {
         this.fFactura = fFactura;
     }
 
-    public Unidad[] getListaProductos() {
+    public ArrayList<Unidad> getListaProductos() {
         return listaProductos;
     }
 
-    public void setListaProductos(Unidad[] listaProductos) {
+    public void setListaProductos(ArrayList<Unidad> listaProductos) {
         this.listaProductos = listaProductos;
     }
 
-    public int getTotal() {
+    public float getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(float total) {
         this.total = total;
     }
 

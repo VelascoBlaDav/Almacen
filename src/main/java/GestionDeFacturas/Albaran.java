@@ -55,7 +55,9 @@ public class Albaran {
         }
         return cadenaReferencia;
     }    
-    
+    public ArrayList<Unidad> getListaProductos() {
+        return listaProductos;
+    }
     public Cliente getComprador() {
         return comprador;
     }
