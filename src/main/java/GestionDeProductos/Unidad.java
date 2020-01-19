@@ -2,7 +2,7 @@
 package GestionDeProductos;
 
 import GestionDeAlmacenes.Almacen;
-import com.mycompany.almacen.Principal;
+import Principal.Principal;
 import java.util.Date;
 
 public class Unidad {
@@ -25,6 +25,7 @@ public class Unidad {
         this.descuento=0;                       //Por defecto no tiene descuento.
         this.estadoProducto=estadoProducto.a;   //Por defecto está libre.
     }
+    
     public static String formatoRefUnidad(int numeroReferencia){
         String cadenaReferencia = null;
         if(1<=numeroReferencia && numeroReferencia<=9){

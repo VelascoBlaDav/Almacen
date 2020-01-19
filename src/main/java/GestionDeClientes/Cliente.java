@@ -46,18 +46,21 @@ public class Cliente {
     public void setCredito(float credito) {
         this.credito = credito;
     }
+    
     public String getCodCliente() {
         return codCliente;
     }
+    
     public void setCodCliente(String codCliente) {
         this.codCliente = codCliente;
     }
+    
     public void aumentaCredito(float credito) {
         this.credito = getCredito()+credito;
     }
+    
     public void reduceCredito(float credito) {
         this.credito = getCredito()-credito;
     }
-     
     
 }

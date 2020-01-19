@@ -1,5 +1,5 @@
 
-package Funciones;
+package GestionDeFunciones;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,6 +12,7 @@ public class Lectura {
         String cadena=sc.nextLine();
         return cadena;
     }
+    
     public static int entero(){
         Scanner sc = new Scanner (System.in);
         String string=sc.nextLine();
@@ -25,6 +26,7 @@ public class Lectura {
         }
         return entero;
     }
+    
     public static float real(){
         Scanner sc = new Scanner (System.in);
         String string=sc.nextLine();
@@ -39,6 +41,7 @@ public class Lectura {
         return real;
         
     }
+    
     public static Date fecha(){
         Scanner sc = new Scanner (System.in);
         String string=sc.nextLine();
@@ -53,6 +56,7 @@ public class Lectura {
         }
         return fecha;
     }
+    
     public static boolean booleanoNumerico(){
         int entero=entero();
         if(entero==1){
@@ -61,4 +65,5 @@ public class Lectura {
             return false;
         }
     }
+    
 }

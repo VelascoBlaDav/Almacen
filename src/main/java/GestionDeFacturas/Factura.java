@@ -3,7 +3,7 @@ package GestionDeFacturas;
 
 import GestionDeClientes.Cliente;
 import GestionDeProductos.Unidad;
-import com.mycompany.almacen.Principal;
+import Principal.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 

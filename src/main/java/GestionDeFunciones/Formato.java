@@ -1,5 +1,5 @@
 
-package Funciones;
+package GestionDeFunciones;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

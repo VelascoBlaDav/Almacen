@@ -3,8 +3,7 @@ package GestionDeFacturas;
 
 import GestionDeClientes.Cliente;
 import GestionDeProductos.Unidad;
-import com.mycompany.almacen.Principal;
-import static com.mycompany.almacen.Principal.buscarAlbaran;
+import Principal.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -22,9 +21,11 @@ public class Albaran {
         this.referencia = formatoRefAlbaran(NumAlbaranes);
         this.listaProductos = new ArrayList<>();
     }
+    
     public void addUnidad(Unidad unidad){
         listaProductos.add(unidad);
     }
+    
     public float calcularTotal(){
         float total=0;
         for(int i=0;i<listaProductos.size();i++){
@@ -32,6 +33,7 @@ public class Albaran {
         }
         return total;
     }
+    
     public void imprimirAlbaran(){
             System.out.println("---Albaran---\n");
             System.out.println("Número de albarán: "+getReferencia());
@@ -44,6 +46,7 @@ public class Albaran {
             }
             System.out.println("Total: "+calcularTotal());
     }
+    
     public static String formatoRefAlbaran(int numeroReferencia){
         String cadenaReferencia = null;
         if(1<=numeroReferencia && numeroReferencia<=9){
@@ -54,10 +57,12 @@ public class Albaran {
             cadenaReferencia="AB-" + Integer.toString(numeroReferencia);
         }
         return cadenaReferencia;
-    }    
+    }
+    
     public ArrayList<Unidad> getListaProductos() {
         return listaProductos;
     }
+    
     public Cliente getComprador() {
         return comprador;
     }
@@ -81,8 +86,10 @@ public class Albaran {
     public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
+    
     @Override
     public String toString() {
         return "Albaran:" + "referencia=" + referencia + ", comprador=" + comprador.getNombre() + ", fecha=" + fAlbaran + ", total=" + calcularTotal() ;
     }    
+    
 }

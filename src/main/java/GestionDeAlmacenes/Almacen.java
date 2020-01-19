@@ -60,7 +60,4 @@ public class Almacen {
     public String toString() {
         return "Almacen:" + "codigo=" + codAlmacen + ", nombre=" + nombre + ", zona=" + zona;
     }
-
-    //Conteo productos libre, vendido, reservado.
-    //Productos libres caducados.
 }

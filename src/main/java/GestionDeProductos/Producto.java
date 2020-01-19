@@ -2,7 +2,7 @@
 package GestionDeProductos;
 
 import GestionDeAlmacenes.Almacen;
-import com.mycompany.almacen.Principal;
+import Principal.Principal;
 
 public class Producto {
     private static int NumProductos;
@@ -99,10 +99,6 @@ public class Producto {
     public void setDescAplic(float descAplic) {
         this.descAplic = descAplic;
     }
-
-
-    //Agregar productos a un almacen concreto
-    //Mover producto de un almacen a otro
     
     @Override
     public String toString() {

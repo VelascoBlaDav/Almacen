@@ -1,7 +1,7 @@
-package com.mycompany.almacen;
+package Principal;
 
-import Funciones.Calculo;
-import Funciones.Lectura;
+import GestionDeFunciones.Calculo;
+import GestionDeFunciones.Lectura;
 import GestionDeAlmacenes.Almacen;
 import GestionDeAlmacenes.tipoAlmacen;
 import GestionDeClientes.Cliente;
