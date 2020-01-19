@@ -2,6 +2,7 @@
 package GestionDeFacturas;
 
 import GestionDeClientes.Cliente;
+import GestionDeFunciones.Formato;
 import GestionDeProductos.Unidad;
 import Principal.Principal;
 import java.util.ArrayList;
@@ -89,7 +90,10 @@ public class Albaran {
     
     @Override
     public String toString() {
-        return "Albaran:" + "referencia=" + referencia + ", comprador=" + comprador.getNombre() + ", fecha=" + fAlbaran + ", total=" + calcularTotal() ;
+        return "Albaran:" + "referencia=" + referencia +
+                ", comprador=" + comprador.getNombre() +
+                ", fecha=" + Formato.fecha(fAlbaran) +
+                ", total=" + calcularTotal() ;
     }    
     
 }

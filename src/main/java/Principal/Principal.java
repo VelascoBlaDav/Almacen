@@ -36,7 +36,7 @@ public class Principal {
             System.out.println("0)Salir\n"); //Completo
             System.out.println("1)Añadir un nuevo producto\n"); //Completo
             System.out.println("2)Cambiar de almacen un producto\n"); //Completo
-            System.out.println("3)Listar el unidades en un almacen\n"); //Completo
+            System.out.println("3)Listar productos en un almacen\n"); //Completo
             System.out.println("4)Listar unidades que van a caducar\n"); //Completo
             System.out.println("5)Listar el estado de los productos\n"); //Completo
             System.out.println("6)Listar el unidades libres caducadas\n"); //Completo
@@ -51,7 +51,7 @@ public class Principal {
             System.out.println("15)Listar facturas pendientes de cobro\n");//Completo
             System.out.println("16)Listar facturas\n");//Completo
             System.out.println("17)Listar el stock de un producto\n");//Completo
-            System.out.println("18)Añadir unidades de un producto\n");//Completo
+            System.out.println("18)Listar almacenes\n");//Completo
             System.out.println("19)Añadir unidades a un albaran\n");//Completo
             System.out.println("20)Imprimir albaran\n");//Completo
             System.out.println("21)Imprimir factura\n");//Completo
@@ -61,7 +61,6 @@ public class Principal {
             System.out.println("25)Filtrar productos por precio\n");//Completo
             System.out.println("26)Listar albaranes generados en una fecha\n");//Completo
             System.out.println("27)Suma total económica de productos vendidos\n");//Completo
-            System.out.println("28)Listar almacenes\n");//Completo
 
             int opcion = Lectura.entero();
             switch(opcion){
@@ -117,7 +116,7 @@ public class Principal {
                     menuListarStockProducto();
                     break;
                 case 18:
-                    menuAddUnidad();
+                    listarAlmacenes();
                     break;
                 case 19:
                     menuAddUnidadesAlbaran();
@@ -146,9 +145,6 @@ public class Principal {
                 case 27:
                     System.out.println("El total vendido es: "+sumaTotalUnidadesVendidas()+"€");
                     break;
-                case 28:
-                    listarAlmacenes();
-                    break;
                 case 0:
                     salir = 1;
                     break;
@@ -173,7 +169,7 @@ public class Principal {
         int i;
         for(i=0;i<productos.size();i++){
             if (productos.get(i).getAlmacen().getCodAlmacen().equals(codAlmacen)){
-                productos.get(i).toString();
+                System.out.println(productos.get(i).toString());
             }
         }
     }    
@@ -235,7 +231,8 @@ public class Principal {
     
     public static void listarProductosCercaDeCaducar(){
         for(int i=0;i<unidades.size();i++){
-            if(Calculo.diasRestantes(unidades.get(i).getfCaducidad()) <7){  //Queda menos de 1 semana para que caduquen.
+            if(Calculo.diasRestantes(unidades.get(i).getfCaducidad()) <7 &&         //Queda menos de 1 semana para que caduquen.
+                    Calculo.diasRestantes(unidades.get(i).getfCaducidad()) >=0){    //Todavia no han caducado
                 System.out.println(unidades.get(i).toString());
             }
         }
@@ -293,7 +290,7 @@ public class Principal {
     public static void listarCliente(){
         int i;
         for(i=0;i<clientes.size();i++){
-            clientes.toString();
+            System.out.println(clientes.toString());
         }
     }
     //ALBARAN
@@ -314,7 +311,7 @@ public class Principal {
     //FACTURAS
     public static Factura buscarFactura(String referencia ){
         for (int i=0;i<facturas.size();i++){
-            if(albaranes.get(i).getReferencia().equals(referencia)){
+            if(facturas.get(i).getReferencia().equals(referencia)){
                 return facturas.get(i);
             }
         }
@@ -365,7 +362,7 @@ public class Principal {
         System.out.println("0)Menor o igual");
         System.out.println("1)Mayor o igual");
         opcion=Lectura.booleanoNumerico();
-        if(opcion){
+        if(!opcion){
             for(int i=0;i<productos.size();i++){
                 if(productos.get(i).getpVenta()<=cantidad){
                     System.out.println(productos.get(i).toString());
@@ -380,7 +377,9 @@ public class Principal {
         }
     }
     public static void menuCambiarDescuentoUnidad(){
-        System.out.println("Escribe el codigo del producto a buscar:\n");
+        System.out.println("Lista de unidades:\n");
+        listarUnidades();
+        System.out.println("Escribe el codigo de la unidad:\n");
         String referencia = Lectura.cadena();
         Unidad uni = buscarUnidad(referencia);
         System.out.println("Escribe el % de descuento:\n");
@@ -578,7 +577,7 @@ public class Principal {
         generar=Lectura.booleanoNumerico();
         if(generar){
             factura=generarFactura(refAlbaran);
-            System.out.print("¿Desea añadir alguna observación?");
+            System.out.println("¿Desea añadir alguna observación?");
             System.out.println("0) No");
             System.out.println("1) Si");
             obs=Lectura.booleanoNumerico();
@@ -587,7 +586,7 @@ public class Principal {
                 factura.setObservaciones(observaciones);
             }
                         
-            System.out.print("¿Quiere imprimir la factura?");
+            System.out.println("¿Quiere imprimir la factura?");
             System.out.println("0) No");
             System.out.println("1) Si");
             imprimir=Lectura.booleanoNumerico();

@@ -6,7 +6,7 @@ public class Cliente {
     private String NIF;
     private String direccion;
     private String codCliente;
-    private float credito; //con la compra se reduce, con la devolucion se aumenta
+    private float credito;
 
     public Cliente(String nombre, String NIF, String direccion, float credito) {
         this.nombre = nombre;
@@ -62,5 +62,14 @@ public class Cliente {
     public void reduceCredito(float credito) {
         this.credito = getCredito()-credito;
     }
-    
+    @Override
+    public String toString() {
+        return "Cliente:{" + "codigoCliente=" + codCliente + 
+                ", nombre=" + nombre + 
+                ", NIF=" + NIF + 
+                ", direccion=" + direccion + 
+                ", credito=" + credito+
+                "}";
+                
+    }
 }

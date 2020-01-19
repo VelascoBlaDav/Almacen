@@ -26,7 +26,9 @@ public class Factura {
         this.fFactura=albaran.getfAlbaran();
         this.listaProductos=albaran.getListaProductos();
         this.total=albaran.calcularTotal();
-        
+        this.observaciones="";
+        this.formaPago=formaPago.a; //Por defecto contado
+        this.estadoFactura=estadoFactura.a; //Por defecto no pagada
     }
     public static String formatoRefFactura(int numeroReferencia){
         String cadenaReferencia = null;

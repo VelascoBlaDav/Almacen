@@ -1,5 +1,6 @@
 
 package GestionDeProductos;
+import GestionDeFunciones.Formato;
 import Principal.Principal;
 import java.util.Date;
 
@@ -79,7 +80,12 @@ public class Unidad {
 
     @Override
     public String toString() {
-        return "Unidad{" + "referencia=" + referencia + "tipoProducto=" + tipoProducto + ", estadoProducto=" + estadoProducto + '}';
+        return "Unidad{" + "referencia=" + referencia +
+                " tipoProducto=" + tipoProducto +
+                " descuento=" + descuento +
+                " fechaCaducidad=" + Formato.fecha(fCaducidad) +
+                ", estadoProducto=" + estadoProducto +
+                "}";
     }
     
 }
