@@ -13,7 +13,7 @@ public class Factura {
     private Cliente comprador;
     private Date fFactura;
     private ArrayList<Unidad> listaProductos;
-    private float total;// ToDo: Calcular en funcion de Unidades
+    private float total;
     private String observaciones;
     private formaPago formaPago;
     private estadoFactura estadoFactura;

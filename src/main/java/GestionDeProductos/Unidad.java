@@ -1,7 +1,5 @@
 
 package GestionDeProductos;
-
-import GestionDeAlmacenes.Almacen;
 import Principal.Principal;
 import java.util.Date;
 
@@ -81,7 +79,7 @@ public class Unidad {
 
     @Override
     public String toString() {
-        return "Unidad{" + "tipoProducto=" + tipoProducto + ", estadoProducto=" + estadoProducto + '}';
+        return "Unidad{" + "referencia=" + referencia + "tipoProducto=" + tipoProducto + ", estadoProducto=" + estadoProducto + '}';
     }
     
 }

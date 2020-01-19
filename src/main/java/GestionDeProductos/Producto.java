@@ -84,7 +84,6 @@ public class Producto {
     }
     
     public void setAlmacen(Almacen almacen){
-        //ToDo comprobar si el tipo de almacen necesario existe y si no crearlo
         this.almacen = almacen;
     }
     
@@ -102,6 +101,14 @@ public class Producto {
     
     @Override
     public String toString() {
-        return "Producto:" + "referencia=" + referencia + ", nombre=" + nombre + ", pCompra=" + pCompra + ", pVenta=" + pVenta;
+        return "Producto:" + "referencia=" + referencia + 
+                ", nombre=" + nombre + 
+                ", ancho=" + ancho + 
+                ", alto=" + alto + 
+                ", precioCompra=" + pCompra + 
+                ", precioVenta=" + pVenta +
+                ", descuento=" + descAplic +
+                ", almacen=" + almacen.getCodAlmacen();
+                
     }
 }
