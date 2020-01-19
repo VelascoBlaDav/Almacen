@@ -34,32 +34,40 @@ public class Principal {
             System.out.println("Bienvenido\n");
             System.out.println("¿Que opción desea realizar?\n\n");
             System.out.println("0)Salir\n"); //Completo
+            System.out.println("-------Productos-------"); //Completo
             System.out.println("1)Añadir un nuevo producto\n"); //Completo
-            System.out.println("2)Añadir unidades de un producto existente\n");//Completo
-            System.out.println("3)Registrar un nuevo cliente\n"); //Completo
-            System.out.println("4)Vender producto\n");//Completo
-            System.out.println("5)Listar el estado de los productos\n"); //Completo
-            System.out.println("6)Listar el unidades libres caducadas\n"); //Completo
-            System.out.println("7)Eliminar productos caducados\n"); //Completo
-            System.out.println("8)Listar unidades que van a caducar\n"); //Completo
-            System.out.println("9)Listar productos en un almacen\n"); //Completo
-            System.out.println("10)Listar productos\n");//Completo
-            System.out.println("11)Cambiar de almacen un producto\n"); //Completo
-            System.out.println("12)Cambiar el descuento de una unidad\n");//Completo
-            System.out.println("13)Añadir un nuevo albaran\n");//Completo
-            System.out.println("14)Generar factura de un albaran\n");//Completo
-            System.out.println("15)Listar facturas pendientes de cobro\n");//Completo
-            System.out.println("16)Listar facturas\n");//Completo
-            System.out.println("17)Listar el stock de un producto\n");//Completo
-            System.out.println("18)Listar almacenes\n");//Completo
-            System.out.println("19)Añadir unidades a un albaran\n");//Completo
+            System.out.println("2)Listar productos en un almacen\n"); //Completo
+            System.out.println("3)Listar productos\n");//Completo
+            System.out.println("4)Cambiar de almacen un producto\n"); //Completo
+            System.out.println("5)Filtrar productos por precio\n");//Completo
+            System.out.println("-------Unidades-------"); //Completo
+            System.out.println("6)Añadir unidades de un producto existente\n");//Completo
+            System.out.println("7)Cambiar el descuento de una unidad\n");//Completo
+            System.out.println("8)Listar el estado de las unidades\n"); //Completo
+            System.out.println("9)Listar las unidades libres caducadas\n"); //Completo
+            System.out.println("10)Listar unidades que van a caducar\n"); //Completo
+            System.out.println("11)Eliminar unidades caducadas\n"); //Completo
+            System.out.println("12)Listar el stock de un producto\n");//Completo
+            System.out.println("13)Listar el stock completo\n");//Completo
+            System.out.println("-------Clientes-------"); //Completo
+            System.out.println("14)Registrar un nuevo cliente\n"); //Completo
+            System.out.println("-------Almacenes-------"); //Completo
+            System.out.println("15)Listar almacenes\n");//Completo
+            System.out.println("-------Albaranes-------"); //Completo
+            System.out.println("16)Añadir un nuevo albaran\n");//Completo
+            System.out.println("17)Añadir unidades a un albaran\n");//Completo
+            System.out.println("18)Listar albaranes\n");//Completo
+            System.out.println("19)Listar albaranes generados en una fecha\n");//Completo
             System.out.println("20)Imprimir albaran\n");//Completo
-            System.out.println("21)Imprimir factura\n");//Completo
-            System.out.println("22)Listar facturas de un cliente\n");//Completo
-            System.out.println("23)Listar el stock completo\n");//Completo
-            System.out.println("24)Listar albaranes\n");//Completo
-            System.out.println("25)Filtrar productos por precio\n");//Completo
-            System.out.println("26)Listar albaranes generados en una fecha\n");//Completo
+            System.out.println("-------Facturas-------"); //Completo
+            System.out.println("21)Generar factura de un albaran\n");//Completo
+            System.out.println("22)Listar facturas\n");//Completo
+            System.out.println("23)Listar facturas pendientes de cobro\n");//Completo
+            System.out.println("24)Listar facturas de un cliente\n");//Completo
+            System.out.println("25)Imprimir factura\n");//Completo
+            System.out.println("-------Venta-------"); //Completo
+            System.out.println("26)Realizar una venta\n");//Completo
+            System.out.println("-------Otros-------"); //Completo
             System.out.println("27)Suma total económica de productos vendidos\n");//Completo
 
             int opcion = Lectura.entero();
@@ -68,79 +76,79 @@ public class Principal {
                     menuAddProducto();
                     break;
                 case 2:
-                    menuAddUnidad();
-                    break;
-                case 3:
-                    menuAddCliente();
-                    break;
-                case 4:
-                    menuVenta();
-                    break;
-                case 5:
-                    listarEstadoProductos();
-                    break;
-                case 6:
-                    listarProductosLibresCaducados();
-                    break;
-                case 7:
-                    borrarProductosCaducados();
-                    break;
-                case 8:
-                    listarProductosCercaDeCaducar();
-                    break;
-                case 9:
                     menuListarUnidadesEnAlmacen();
                     break;
-                case 10:
+                case 3:
                     listarProductos();
                     break;
-                case 11:
+                case 4:
                     menuMoverProducto();
                     break;
-                case 12:
+                case 5:
+                    menuListarProductosPorPrecio();
+                    break;
+                case 6:
+                    menuAddUnidad();
+                    break;
+                case 7:
                     menuCambiarDescuentoUnidad();
                     break;
-                case 13:
-                    menuAddAlbaran();
+                case 8:
+                    listarEstadoProductos();
                     break;
-                case 14:
-                    menuAddFactura();
+                case 9:
+                    listarProductosLibresCaducados();
                     break;
-                case 15:
-                    listarFacturasPendientes();
+                case 10:
+                    listarProductosCercaDeCaducar();
                     break;
-                case 16:
-                    listarFacturas();
+                case 11:
+                    borrarProductosCaducados();
                     break;
-                case 17:
+                case 12:
                     menuListarStockProducto();
                     break;
-                case 18:
+                case 13:
+                    listarStock();
+                    break;
+                case 14:
+                    menuAddCliente();
+                    break;
+                case 15:
                     listarAlmacenes();
                     break;
-                case 19:
+                case 16:
+                    menuAddAlbaran();
+                    break;
+                case 17:
                     menuAddUnidadesAlbaran();
+                    break;
+                case 18:
+                    listarAlbaranes();
+                    break;
+                case 19:
+                    menuAlbaranDeUnDia();
                     break;
                 case 20:
                     menuImprimirAlbaran();
                     break;
                 case 21:
-                    menuImprimirFactura();
+                    menuAddFactura();
                     break;
                 case 22:
-                    menuListarFacturasCliente();
+                    listarFacturas();
                     break;
                 case 23:
-                    listarStock();
+                    listarFacturasPendientes();
                     break;
                 case 24:
-                    listarAlbaranes();
+                    menuListarFacturasCliente();
                     break;
                 case 25:
-                    menuListarProductosPorPrecio();
+                    menuImprimirFactura();
                     break;
                 case 26:
-                    menuAlbaranDeUnDia();
+                    menuVenta();
                     break;
                 case 27:
                     System.out.println("El total vendido es: "+sumaTotalUnidadesVendidas()+"€");
