@@ -35,16 +35,16 @@ public class Principal {
             System.out.println("¿Que opción desea realizar?\n\n");
             System.out.println("0)Salir\n"); //Completo
             System.out.println("1)Añadir un nuevo producto\n"); //Completo
-            System.out.println("2)Cambiar de almacen un producto\n"); //Completo
-            System.out.println("3)Listar productos en un almacen\n"); //Completo
-            System.out.println("4)Listar unidades que van a caducar\n"); //Completo
+            System.out.println("2)Añadir unidades de un producto existente\n");//Completo
+            System.out.println("3)Registrar un nuevo cliente\n"); //Completo
+            System.out.println("4)Vender producto\n");//Completo
             System.out.println("5)Listar el estado de los productos\n"); //Completo
             System.out.println("6)Listar el unidades libres caducadas\n"); //Completo
             System.out.println("7)Eliminar productos caducados\n"); //Completo
-            System.out.println("8)Vender producto\n");//Completo
-            System.out.println("9)Registrar un nuevo cliente\n"); //Completo
+            System.out.println("8)Listar unidades que van a caducar\n"); //Completo
+            System.out.println("9)Listar productos en un almacen\n"); //Completo
             System.out.println("10)Listar productos\n");//Completo
-            System.out.println("11)Añadir unidades de un producto existente\n");//Completo
+            System.out.println("11)Cambiar de almacen un producto\n"); //Completo
             System.out.println("12)Cambiar el descuento de una unidad\n");//Completo
             System.out.println("13)Añadir un nuevo albaran\n");//Completo
             System.out.println("14)Generar factura de un albaran\n");//Completo
@@ -68,13 +68,13 @@ public class Principal {
                     menuAddProducto();
                     break;
                 case 2:
-                    menuMoverProducto();
+                    menuAddUnidad();
                     break;
                 case 3:
-                    menuListarUnidadesEnAlmacen();
+                    menuAddCliente();
                     break;
                 case 4:
-                    listarProductosCercaDeCaducar();
+                    menuVenta();
                     break;
                 case 5:
                     listarEstadoProductos();
@@ -86,16 +86,16 @@ public class Principal {
                     borrarProductosCaducados();
                     break;
                 case 8:
-                    menuVenta();
+                    listarProductosCercaDeCaducar();
                     break;
                 case 9:
-                    menuAddCliente();
+                    menuListarUnidadesEnAlmacen();
                     break;
                 case 10:
                     listarProductos();
                     break;
                 case 11:
-                    menuAddUnidad();
+                    menuMoverProducto();
                     break;
                 case 12:
                     menuCambiarDescuentoUnidad();
@@ -549,11 +549,13 @@ public class Principal {
     
     public static void menuAddFactura(){
         String referencia;
+        Factura factura;
         System.out.println("La lista de albaranes es esta:\n");
         listarAlbaranes();
         System.out.println("Seleccione el albaran:\n");
         referencia = Lectura.cadena();
-        generarFactura(referencia);
+        factura=generarFactura(referencia);
+        factura.imprimirFactura();        
     }
     public static Factura generarFactura(String refAlbaran){
         Albaran albaran=buscarAlbaran(refAlbaran);          
@@ -658,7 +660,7 @@ public class Principal {
         Unidad uni;
         for(int i=0;i<unidades.size();i++){
             uni=unidades.get(i);
-            if(uni.getEstadoProducto().equals(estadoProducto.b)){   //Unidades marcadas como vendidas
+            if(uni.getEstadoProducto().equals(estadoProducto.c)){   //Unidades marcadas como vendidas
                 total+=uni.getTipoProducto().getpVenta();           //Precio de venta del producto asociado
             }
         }

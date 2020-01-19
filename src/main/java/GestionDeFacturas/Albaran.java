@@ -40,7 +40,7 @@ public class Albaran {
             System.out.println("Número de albarán: "+getReferencia());
             System.out.println("Nombre del cliente: "+getComprador().getNombre());
             System.out.println("NIF del cliente: "+getComprador().getNIF());
-            System.out.println("Fecha del albarán: "+getfAlbaran());
+            System.out.println("Fecha del albarán: "+Formato.fecha(getfAlbaran()));
             System.out.println("Productos: ");
             for(int i=0;i<listaProductos.size();i++){
                 System.out.println(listaProductos.get(i).toString());

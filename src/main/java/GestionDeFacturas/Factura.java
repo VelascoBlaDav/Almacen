@@ -2,6 +2,7 @@
 package GestionDeFacturas;
 
 import GestionDeClientes.Cliente;
+import GestionDeFunciones.Formato;
 import GestionDeProductos.Unidad;
 import Principal.Principal;
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class Factura {
             System.out.println("Número de factura: "+getReferencia());
             System.out.println("Nombre del cliente: "+getComprador().getNombre());
             System.out.println("NIF del cliente: "+getComprador().getNIF());
-            System.out.println("Fecha de la factura: "+getfFactura());
+            System.out.println("Fecha de la factura: "+Formato.fecha(getfFactura()));
             System.out.println("Productos: ");
             for(int i=0;i<listaProductos.size();i++){
                 System.out.println(listaProductos.get(i).toString());
@@ -128,8 +129,12 @@ public class Factura {
     }
     @Override
     public String toString() {
-        return "Factura:" + "referencia=" + referencia + ", comprador=" + comprador.getNombre() +
-                ", fecha=" + fFactura + ", total=" + total + ", observaciones=" + observaciones +
-                ", forma de pago=" + formaPago + ", estado=" + estadoFactura;
+        return "Factura:" + "referencia=" + referencia +
+                ", comprador=" + comprador.getNombre() +
+                ", fecha=" + Formato.fecha(fFactura) +
+                ", total=" + total +
+                ", observaciones=" + observaciones +
+                ", forma de pago=" + formaPago +
+                ", estado=" + estadoFactura;
     }    
 }
